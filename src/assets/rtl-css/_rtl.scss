@@ -1,0 +1,22 @@
+.rtl-active {
+  #bodyClick {
+    right: 260px;
+    left: auto;
+  }
+  ul li,
+  ol li {
+    text-align: right !important;
+  }
+  .c-r {
+    text-align: right !important;
+  }
+  .form-group {
+    text-align: right;
+  }
+  .rtl-txt-left {
+    text-align: center !important;
+  }
+  .rtl-txt-right {
+    text-align: center !important;
+  }
+}
