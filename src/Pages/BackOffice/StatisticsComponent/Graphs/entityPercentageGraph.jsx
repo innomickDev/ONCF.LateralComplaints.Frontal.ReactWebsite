@@ -3,7 +3,6 @@ import { translate } from "react-multi-lang";
 import {
   INDEX_PAGE_SIZE_DEFAULT,
   INDEX_PAGE_SIZE_OPTIONS,
-  getLangBasedDataLabel,
 } from "../../../Helpers/utils";
 import Chart from "react-apexcharts";
 
@@ -33,14 +32,12 @@ class EntityPercentageGraph extends Component {
       options: {
         colors: ["#42f595"],
         chart: {
-          // toolbar: { show: false },
           type: "bar",
           height: 350,
         },
         plotOptions: {
           bar: {
             vertical: true,
-            // distributed: true,
           },
           dataLabels: {
             position: "top",

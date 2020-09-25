@@ -1,6 +1,6 @@
 import { SUB_CATEGORY_CONST } from "./actionTypes";
-import { AXIOS_INSTANCE, SUB_CATEGORY_API, CONFIG } from "./apiEndPoints";
-import { checkHttpStatus, parseJSON, handleLogoutRedirect } from "../utils";
+import { AXIOS_INSTANCE, SUB_CATEGORY_API } from "./apiEndPoints";
+import { checkHttpStatus, parseJSON } from "../utils";
 import * as base from "./baseAction";
 
 //action for get all sub categories

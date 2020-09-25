@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from "react";
 import Select from "react-select";
-import { Input, FormFeedback, FormText, CustomInput } from "reactstrap";
+import {  FormFeedback, FormText,  } from "reactstrap";
 
 export default class RenderSelectMultiInput extends Component {
   onChange(event) {

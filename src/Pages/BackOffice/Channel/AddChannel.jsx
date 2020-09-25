@@ -1,5 +1,5 @@
-import React, { Fragment, Component } from "react";
-import { reduxForm, Field, change } from "redux-form";
+import React, { Fragment } from "react";
+import { reduxForm, Field } from "redux-form";
 import { translate } from "react-multi-lang";
 import { connect } from "react-redux";
 import compose from "compose-function";
@@ -16,7 +16,6 @@ import {
 } from "../../Helpers/utils";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
@@ -24,10 +23,9 @@ import {
   FormGroup,
   Row,
   Col,
-  Label,
 } from "reactstrap";
 
-import { addCategory, updateCategory } from "../../../actions/categoryAction";
+import { updateCategory } from "../../../actions/categoryAction";
 import { addChannel } from "../../../actions/channelAction";
 
 class AddChannel extends React.Component {
@@ -109,12 +107,6 @@ class AddChannel extends React.Component {
   render() {
     const { handleSubmit } = this.props;
 
-    const Checkbox = ({ input, meta: { touched, error } }) => (
-      <div style={{ border: touched && error ? "1px solid red" : "none" }}>
-        <input type="checkbox" {...input} />
-        <label>{this.props.t("Common.IS_SUB_SUB_CATEGORY")}</label>
-      </div>
-    );
     return (
       <Fragment>
         <Modal isOpen={this.props.modal} toggle={this.toggle}>

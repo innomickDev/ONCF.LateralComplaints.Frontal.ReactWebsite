@@ -1,35 +1,32 @@
 import React, { Fragment, Component } from "react";
-import { Row, Col, Card, CardBody, Button, DropdownMenu ,DropdownItem,UncontrolledButtonDropdown, DropdownToggle,InputGroup,
-  InputGroupAddon} from "reactstrap";
+import {
+  Row,
+  Col,
+  Card,
+  CardBody,
+  DropdownMenu,
+  DropdownItem,
+  UncontrolledButtonDropdown,
+  DropdownToggle,
+} from "reactstrap";
 import { translate } from "react-multi-lang";
 import ReactTable from "react-table";
 import compose from "compose-function";
 import DatePicker from "react-datepicker";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
-import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import SubmitBtnLoader from "../../../Common/ButtonLoader";
-
-//
-// import FooterComponent from "./Footer";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import {
   INDEX_PAGE_SIZE_DEFAULT,
   INDEX_PAGE_SIZE_OPTIONS,
-  showSuccess,
   showError,
-  getLangBasedItem,
   getLangBasedDataLabel,
   dateFormat,
   dateTimeFormat,
   canManage,
   permissions,
-  defaultDateFormat,
-  normalDateFormat
-  
 } from "../../../Helpers/utils";
 import moment from "moment";
 
@@ -51,8 +48,8 @@ class ClaimListComponent extends Component {
       loading: false,
       isShowRolesModal: false,
       dobStartDate: null,
-    dobEndDate: null,
-      startDates:null,
+      dobEndDate: null,
+      startDates: null,
       endDates: null,
       isClaimUsers: false,
       mainLoader: true,
@@ -75,7 +72,6 @@ class ClaimListComponent extends Component {
     };
   }
   handleStartDateChange = (date) => {
-    console.log(date)
     this.setState({ startDates: date });
   };
   // This function is used to handle EndDateChange
@@ -147,7 +143,6 @@ class ClaimListComponent extends Component {
               referenceNo: claim.referenceNo,
               isAnswered: claim.isAnswered,
 
-
               assignedTo: claim.agentName ? claim.agentName : "",
               claimStatus: claim ? claim.claimStatus : null, //todo
               claimChannel: claim.claimChannel ? claim.claimChannel : "",
@@ -180,9 +175,10 @@ class ClaimListComponent extends Component {
       if (
         nextProps.getAllClaimsDataFail &&
         nextProps.getAllClaimsDataFail !== this.props.getAllClaimsDataFail
-      ) {this.setState({
-        claims:[]
-      })
+      ) {
+        this.setState({
+          claims: [],
+        });
         showError(this.props.t("Common.NO_CLAIMS"));
 
         this.setState({
@@ -288,35 +284,37 @@ class ClaimListComponent extends Component {
   getHeader = () => {
     const dropDown = (
       <UncontrolledButtonDropdown>
-      <DropdownToggle caret className="btn-icon btn-icon-only btn btn-link" color="link">
-         status
-      </DropdownToggle>
-      <DropdownMenu>    
-          <DropdownItem>  
-              <span>Menus</span>
+        <DropdownToggle
+          caret
+          className="btn-icon btn-icon-only btn btn-link"
+          color="link"
+        >
+          status
+        </DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem>
+            <span>Menus</span>
           </DropdownItem>
           <DropdownItem>
-              <span>Settings</span>
+            <span>Settings</span>
           </DropdownItem>
           <DropdownItem>
-              <span>Actions</span>
-          </DropdownItem>  
-      </DropdownMenu>
-  </UncontrolledButtonDropdown>
+            <span>Actions</span>
+          </DropdownItem>
+        </DropdownMenu>
+      </UncontrolledButtonDropdown>
     );
-    return <div> {this.props.t("Common.STATUS")}, {dropDown} </div>;
+    return (
+      <div>
+        {" "}
+        {this.props.t("Common.STATUS")}, {dropDown}{" "}
+      </div>
+    );
   };
 
   render() {
-    // const  selected=
-    //   startDate
-    //     ? new Date(startDate)
-    //     : this.state.startDates;
-    
-    const { startDate } = this.state;  
-    console.log(this.state.startDates)
     const { claims } = this.state;
-  
+
     const header = {
       name: this.props.t("Common.NAME"),
       referanceNo: this.props.t("Common.REF_NUM"),
@@ -393,165 +391,160 @@ class ClaimListComponent extends Component {
                 <CardBody className="text-center">
                   <ReactTable
                     filterable
-                   
-                      
-                    data={claims}  
-                    
+                    data={claims}
                     columns={[
                       {
-                        
                         columns: [
                           {
-                            
                             Header: header.referanceNo,
                             accessor: "referenceNo",
-                           
                           },
                           {
                             Header: header.claimStatus,
                             accessor: "claimStatus",
                             id: "claimStatus",
-                            Cell: (row) => ( <div>
-                              <div className="widget-content p-0">
-                                <div className="widget-content-wrapper">
-                                  <div className="d-inline">
-                                
-                                    {row.value
-                                      ? row.value === "1" && (
-                                          <span>
-                                            <i className="fas fa-circle text-primary"></i>{" "}
-                                            {this.props.t("Common.SUBMITTED")}
-                                          </span>
-                                        )
-                                      : null}
-                                    {row.value
-                                      ? row.value === "2" && (
-                                          <span>
-                                            <i className="fas fa-circle text-warning"></i>{" "}
-                                            {this.props.t("Common.PROGRESS")}
-                                          </span>
-                                        )
-                                      : null}
-                                    {row.value
-                                      ? row.value === "3" && (
-                                          <span>
-                                            <i className="fas fa-circle text-success"></i>{" "}
-                                            {this.props.t("Common.APPROVE")}
-                                          </span>
-                                        )
-                                      : null}
-                                    {row.value
-                                      ? row.value === "4" && (
-                                          <span>
-                                            <i className="fas fa-circle text-danger"></i>{" "}
-                                            {this.props.t("Common.REJECT_S")}
-                                          </span>
-                                        )
-                                      : null}
-                                    {row.value
-                                      ? row.value === "5" && (
-                                          <span>
-                                            <i className="fas fa-circle text-success"></i>{" "}
-                                            {this.props.t(
-                                              "Common.TEMPORARY_APPROVE"
-                                            )}
-                                          </span>
-                                        )
-                                      : null}
+                            Cell: (row) => (
+                              <div>
+                                <div className="widget-content p-0">
+                                  <div className="widget-content-wrapper">
+                                    <div className="d-inline">
+                                      {row.value
+                                        ? row.value === "1" && (
+                                            <span>
+                                              <i className="fas fa-circle text-primary"></i>{" "}
+                                              {this.props.t("Common.SUBMITTED")}
+                                            </span>
+                                          )
+                                        : null}
+                                      {row.value
+                                        ? row.value === "2" && (
+                                            <span>
+                                              <i className="fas fa-circle text-warning"></i>{" "}
+                                              {this.props.t("Common.PROGRESS")}
+                                            </span>
+                                          )
+                                        : null}
+                                      {row.value
+                                        ? row.value === "3" && (
+                                            <span>
+                                              <i className="fas fa-circle text-success"></i>{" "}
+                                              {this.props.t("Common.APPROVE")}
+                                            </span>
+                                          )
+                                        : null}
+                                      {row.value
+                                        ? row.value === "4" && (
+                                            <span>
+                                              <i className="fas fa-circle text-danger"></i>{" "}
+                                              {this.props.t("Common.REJECT_S")}
+                                            </span>
+                                          )
+                                        : null}
+                                      {row.value
+                                        ? row.value === "5" && (
+                                            <span>
+                                              <i className="fas fa-circle text-success"></i>{" "}
+                                              {this.props.t(
+                                                "Common.TEMPORARY_APPROVE"
+                                              )}
+                                            </span>
+                                          )
+                                        : null}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
-                            </div>),
+                            ),
                             filterMethod: (filter, row) => {
-                              console.log(filter)
                               if (filter.value === "0") {
-                                console.log()
                                 return true;
                               }
                               if (filter.value === "1") {
-                                return (
-                                 row[filter.id]==="1"
-                                ) 
+                                return row[filter.id] === "1";
                               }
                               if (filter.value === "2") {
-                                return (
-                                 row[filter.id]==="2"
-                                ) 
+                                return row[filter.id] === "2";
                               }
                               if (filter.value === "3") {
-                                return (
-                                 row[filter.id]==="3"
-                                ) 
+                                return row[filter.id] === "3";
                               }
                               if (filter.value === "4") {
-                                return (
-                                 row[filter.id]==="4"
-                                ) 
+                                return row[filter.id] === "4";
                               }
                               if (filter.value === "5") {
-                                return (
-                                 row[filter.id]==="5"
-                                ) 
+                                return row[filter.id] === "5";
                               }
-                              
                             },
-                            Filter: ({ filter, onChange }) =>
+                            Filter: ({ filter, onChange }) => (
                               <select
-                                onChange={event => onChange(event.target.value)}
+                                onChange={(event) =>
+                                  onChange(event.target.value)
+                                }
                                 style={{ width: "100%" }}
                                 value={filter ? filter.value : "0"}
                               >
-                                <option value="">{this.props.t("ClaimStatus.SELECT_STATUS")}</option>
-                                <option value="1"> {this.props.t("Common.SUBMITTED")}</option>
-                                <option value="2">{this.props.t("Common.PROGRESS")}</option>
-                                <option value="3">{this.props.t("Common.APPROVE")}</option>
-                                <option value="4">{this.props.t("Common.REJECT_S")}</option>
-                                <option value="5">{this.props.t("Common.TEMPORARY_APPROVE")}</option>
+                                <option value="">
+                                  {this.props.t("ClaimStatus.SELECT_STATUS")}
+                                </option>
+                                <option value="1">
+                                  {" "}
+                                  {this.props.t("Common.SUBMITTED")}
+                                </option>
+                                <option value="2">
+                                  {this.props.t("Common.PROGRESS")}
+                                </option>
+                                <option value="3">
+                                  {this.props.t("Common.APPROVE")}
+                                </option>
+                                <option value="4">
+                                  {this.props.t("Common.REJECT_S")}
+                                </option>
+                                <option value="5">
+                                  {this.props.t("Common.TEMPORARY_APPROVE")}
+                                </option>
                               </select>
+                            ),
                           },
                           {
                             Header: header.created,
                             accessor: "createDate",
                             id: "createDate",
-                            value:this.state.startDates ? this.state.startDates: "",
-                            render: row => (
-                             
+                            value: this.state.startDates
+                              ? this.state.startDates
+                              : "",
+                            render: (row) => (
                               <div>
-                               
                                 {moment(row.value).format("DD.MM.YYYY")}
                               </div>
                             ),
-                            Filter: ({filter, onChange}) => (
-                              
+                            Filter: ({ filter, onChange }) => (
                               <DatePicker
-                              popperPlacement="bottom"
-                              popperModifiers={{
-                                flip: {
-                                    behavior: ["bottom"] // don't allow it to flip to be above
-                                },
-                                preventOverflow: {
-                                    enabled: false // tell it not to try to stay within the view (this prevents the popper from covering the element you clicked)
-                                },
-                                hide: {
-                                    enabled: false // turn off since needs preventOverflow to be enabled
+                                popperPlacement="bottom"
+                                popperModifiers={{
+                                  flip: {
+                                    behavior: ["bottom"], // don't allow it to flip to be above
+                                  },
+                                  preventOverflow: {
+                                    enabled: false, // tell it not to try to stay within the view (this prevents the popper from covering the element you clicked)
+                                  },
+                                  hide: {
+                                    enabled: false, // turn off since needs preventOverflow to be enabled
+                                  },
+                                }}
+                                className="form-control"
+                                dateFormat="yyyy/MM/dd"
+                                selected={this.state.startDates}
+                                onChange={(event) =>
+                                  onChange(
+                                    this.setState({
+                                      startDates: event,
+                                    })
+                                  )
                                 }
-                            }}
-                              className="form-control"
-                              dateFormat="yyyy/MM/dd"
-                             
-                              selected={
-                                this.state.startDates
-                              
-                              }
-                              onChange={event => onChange(this.setState({
-                                startDates:event
-                              }))}
                               />
-                            
                             ),
-                           
                           },
-                       
+
                           {
                             Header: header.assignedTo,
                             accessor: "assignedTo",
@@ -618,178 +611,186 @@ class ClaimListComponent extends Component {
                         placeholder: this.props.t("Common.THREE_LETTER"),
                       },
                       {
-                        id:"claimStatus"
+                        id: "claimStatus",
                       },
                       {
-                        id:"createDate"
-                      }
+                        id: "createDate",
+                      },
                     ]}
-              
                     onFilteredChange={(filtered) => console.log(filtered)}
                     onFetchData={(state, instance) => {
                       let queryString = {
                         page: state.page + 1,
                         pageSize: state.pageSize,
                       };
-                      console.log(state.filtered)
+
                       if (
                         state.filtered &&
-                        state.filtered.length===2  
+                        state.filtered.length === 2
                         // state.filtered.length===3
                         // state.filtered[0].value && state.filtered[0].value.length > 4 && state.filtered[1].value
                       ) {
-                        if(state.filtered[0].id==="referenceNo"){
-
+                        if (state.filtered[0].id === "referenceNo") {
                           queryString.searchs = [
                             {
                               searchField: "referenceNo",
-                              value:state.filtered[0].value
+                              value: state.filtered[0].value,
                             },
                             {
                               searchField: "claimStatus",
-                              value:state.filtered[1].value
-                            },
-                            
-                          
-                          ] ;
-                        }
-                        else if(state.filtered[0].id==="claimStatus") {
-                          queryString.searchs = [
-                            {
-                              searchField: "claimStatus",
-                              value:state.filtered[0].value
-                            },
-                            {
-                              searchField: "referenceNo",
-                              value:state.filtered[1].value
+                              value: state.filtered[1].value,
                             },
                           ];
-                        }      
-                      }
-                      else if(state.filtered &&
-                        state.filtered.length===1 && this.state.startDates){
-                          if(state.filtered[0].id==="referenceNo" && this.state.startDates)
-                          {
-
-                            queryString.searchs = [
-                              {
-                                searchField: "referenceNo",
-                                value:state.filtered[0].value
-                              },
-                             
-                              {
-                                searchField: "createDate",
-                                value:moment(new Date(this.state.startDates)).format("YYYY-MM-DD")
-                              },
-                            
-                            ] ;
-                          }
-                          else if(state.filtered[0].id==="claimStatus" && this.state.startDates) {
-                            queryString.searchs = [
-                              {
-                                searchField: "claimStatus",
-                                value:state.filtered[0].value
-                              },
-                              {
-                                searchField: "createDate",
-                                value:moment(new Date(this.state.startDates)).format("YYYY-MM-DD")
-                              }, 
-                            ];
-                          }     
-                         
-                      }
-                      else if (
+                        } else if (state.filtered[0].id === "claimStatus") {
+                          queryString.searchs = [
+                            {
+                              searchField: "claimStatus",
+                              value: state.filtered[0].value,
+                            },
+                            {
+                              searchField: "referenceNo",
+                              value: state.filtered[1].value,
+                            },
+                          ];
+                        }
+                      } else if (
                         state.filtered &&
-                        state.filtered.length===2 && this.state.startDates
+                        state.filtered.length === 1 &&
+                        this.state.startDates
                       ) {
-                         if(state.filtered[0].id==="referenceNo" && this.state.startDates) {
+                        if (
+                          state.filtered[0].id === "referenceNo" &&
+                          this.state.startDates
+                        ) {
                           queryString.searchs = [
                             {
                               searchField: "referenceNo",
-                              value:state.filtered[0].value
+                              value: state.filtered[0].value,
                             },
-                            {
-                              searchField: "claimStatus",
-                              value:state.filtered[1].value
-                            },
+
                             {
                               searchField: "createDate",
-                              value:moment(new Date(this.state.startDates)).format("YYYY-MM-DD")
-                            },  
-                          ] ;
-                        }
-                        else if(state.filtered[0].id==="claimStatus" && this.state.startDates) {
-                          queryString.searchs = [
-                            {
-                              searchField: "claimStatus",
-                              value:state.filtered[0].value
+                              value: moment(
+                                new Date(this.state.startDates)
+                              ).format("YYYY-MM-DD"),
                             },
-                            {
-                              searchField: "referenceNo",
-                              value:state.filtered[1].value
-                            },
-                            {
-                              searchField: "createDate",
-                              value:moment(new Date(this.state.startDates)).format("YYYY-MM-DD")
-                            },   
                           ];
-                        }
-                        else if (this.state.startDates) {
+                        } else if (
+                          state.filtered[0].id === "claimStatus" &&
+                          this.state.startDates
+                        ) {
                           queryString.searchs = [
                             {
-                              searchField: "createDate",
-                              value: moment(new Date(this.state.startDates)).format("YYYY-MM-DD")
-                            },
-                            {
-                              searchField: "referenceNo",
-                              value:state.filtered[0].value
-                            },
-                            {
                               searchField: "claimStatus",
-                              value:state.filtered[1].value
+                              value: state.filtered[0].value,
+                            },
+                            {
+                              searchField: "createDate",
+                              value: moment(
+                                new Date(this.state.startDates)
+                              ).format("YYYY-MM-DD"),
                             },
                           ];
                         }
-                      }
-                       
-                      else if (state.filtered &&
-                        state.filtered.length && 
-                        state.filtered[0].value && state.filtered[0].id==="referenceNo" && state.filtered[0].value.length > 4) 
-                       {
-                        queryString.searchs = [ 
+                      } else if (
+                        state.filtered &&
+                        state.filtered.length === 2 &&
+                        this.state.startDates
+                      ) {
+                        if (
+                          state.filtered[0].id === "referenceNo" &&
+                          this.state.startDates
+                        ) {
+                          queryString.searchs = [
+                            {
+                              searchField: "referenceNo",
+                              value: state.filtered[0].value,
+                            },
+                            {
+                              searchField: "claimStatus",
+                              value: state.filtered[1].value,
+                            },
+                            {
+                              searchField: "createDate",
+                              value: moment(
+                                new Date(this.state.startDates)
+                              ).format("YYYY-MM-DD"),
+                            },
+                          ];
+                        } else if (
+                          state.filtered[0].id === "claimStatus" &&
+                          this.state.startDates
+                        ) {
+                          queryString.searchs = [
+                            {
+                              searchField: "claimStatus",
+                              value: state.filtered[0].value,
+                            },
+                            {
+                              searchField: "referenceNo",
+                              value: state.filtered[1].value,
+                            },
+                            {
+                              searchField: "createDate",
+                              value: moment(
+                                new Date(this.state.startDates)
+                              ).format("YYYY-MM-DD"),
+                            },
+                          ];
+                        } else if (this.state.startDates) {
+                          queryString.searchs = [
+                            {
+                              searchField: "createDate",
+                              value: moment(
+                                new Date(this.state.startDates)
+                              ).format("YYYY-MM-DD"),
+                            },
+                            {
+                              searchField: "referenceNo",
+                              value: state.filtered[0].value,
+                            },
+                            {
+                              searchField: "claimStatus",
+                              value: state.filtered[1].value,
+                            },
+                          ];
+                        }
+                      } else if (
+                        state.filtered &&
+                        state.filtered.length &&
+                        state.filtered[0].value &&
+                        state.filtered[0].id === "referenceNo" &&
+                        state.filtered[0].value.length > 4
+                      ) {
+                        queryString.searchs = [
                           {
                             searchField: "referenceNo",
-                            value:state.filtered[0].value
-                          }
+                            value: state.filtered[0].value,
+                          },
                         ];
-                      }
-                      else if (state.filtered &&
-                        state.filtered.length && state.filtered[0].value && state.filtered[0].id==="claimStatus")   
-                       {
+                      } else if (
+                        state.filtered &&
+                        state.filtered.length &&
+                        state.filtered[0].value &&
+                        state.filtered[0].id === "claimStatus"
+                      ) {
                         queryString.searchs = [
-                         
                           {
                             searchField: "claimStatus",
-                            value:state.filtered[0].value
-                          }
+                            value: state.filtered[0].value,
+                          },
                         ];
-                      }
-                      else if(this.state.startDates!==null)
-                      
-                     
-                       {
+                      } else if (this.state.startDates !== null) {
                         queryString.searchs = [
-                         
                           {
                             searchField: "createDate",
-                            value: moment(new Date(this.state.startDates)).format("YYYY-MM-DD")
-                            
-                          }
+                            value: moment(
+                              new Date(this.state.startDates)
+                            ).format("YYYY-MM-DD"),
+                          },
                         ];
                       }
-                     
-                     
-                      console.log(queryString)
+
                       this.props.dispatch(getAllClaims(queryString));
                     }}
                     className="-highlight"

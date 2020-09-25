@@ -9,8 +9,6 @@ import { connect } from "react-redux";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  INDEX_PAGE_SIZE_DEFAULT,
-  INDEX_PAGE_SIZE_OPTIONS,
   showSuccess,
   showError,
   canManage,
@@ -35,13 +33,6 @@ class ChannelComponent extends Component {
       loading: false,
       isShowRolesModal: false,
       mainLoader: true,
-      // meta: {
-      //   page: 1,
-      //   pageSize: INDEX_PAGE_SIZE_DEFAULT,
-      //   pageSizeOptions: INDEX_PAGE_SIZE_OPTIONS,
-      //   pageTotal: 1,
-      //   total: 0,
-      // },
     };
     this.translations = {
       previousText: this.props.t("ReactTable.PREVIOUS"),
@@ -68,24 +59,6 @@ class ChannelComponent extends Component {
         nextProps.listDataSuccess &&
         nextProps.listDataSuccess !== this.props.listDataSuccess
       ) {
-        console.log(nextProps.listDataSuccess);
-        // const meta = {
-        //   page: nextProps.listDataSuccess.pagination.page,
-        //   pageSize: nextProps.listDataSuccess.pagination.pageSize,
-        //   pageSizeOptions: INDEX_PAGE_SIZE_OPTIONS,
-        //   pageTotal: 1,
-        //   total:
-        //     nextProps.listDataSuccess.pagination.total %
-        //     nextProps.listDataSuccess.pagination.pageSize
-        //       ? parseInt(
-        //           nextProps.listDataSuccess.pagination.total /
-        //             nextProps.listDataSuccess.pagination.pageSize
-        //         ) + 1
-        //       : parseInt(
-        //           nextProps.listDataSuccess.pagination.total /
-        //             nextProps.listDataSuccess.pagination.pageSize
-        //         ),
-        // };
         this.setState({ mainLoader: false });
         let categories = [];
         if (nextProps.listDataSuccess && nextProps.listDataSuccess.length)
@@ -315,31 +288,7 @@ class ChannelComponent extends Component {
                         ],
                       },
                     ]}
-                    // manual
-                    // pages={this.state.meta.pageTotal}
                     defaultPageSize={5}
-                    // onFilteredChange={(filtered) => console.log(filtered)}
-                    // onFetchData={(state, instance) => {
-                    //   let queryString = {
-                    //     page: state.page + 1,
-                    //     pageSize: state.pageSize,
-                    //   };
-                    //   if (
-                    //     state.filtered &&
-                    //     state.filtered.length &&
-                    //     state.filtered[0].value.length > 4
-                    //   ) {
-                    //     console.log(state.filtered);
-                    //     queryString.searchs = [
-                    //       {
-                    //         searchField: "referenceNo",
-                    //         value: state.filtered[0].value,
-                    //       },
-                    //     ];
-                    //   }
-
-                    //   this.props.dispatch(getListChannel(queryString));
-                    // }}
                     className="-highlight"
                     {...this.translations}
                   />

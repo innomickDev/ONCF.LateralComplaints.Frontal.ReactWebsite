@@ -6,14 +6,9 @@ import ReactTable from "react-table";
 import compose from "compose-function";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import SubmitBtnLoader from "../../Common/ButtonLoader";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  INDEX_PAGE_SIZE_DEFAULT,
-  INDEX_PAGE_SIZE_OPTIONS,
-  showSuccess,
-  showError,
-} from "../../Helpers/utils";
+import { showSuccess, showError } from "../../Helpers/utils";
 
 // api calls
 import {
@@ -23,12 +18,7 @@ import {
 import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import AddEntityResponsibility from "./AddEntityResponsibility";
-import {
-  getLangBasedValues,
-  getLangBasedDataLabel,
-  LANG_CODES,
-  getLangBasedItem,
-} from "../../Helpers/utils";
+import { getLangBasedDataLabel } from "../../Helpers/utils";
 import MainLoader from "../../Common/Loader";
 
 class EntityResponsibilityComponent extends Component {
@@ -41,13 +31,6 @@ class EntityResponsibilityComponent extends Component {
       isShowRolesModal: false,
       mainLoader: true,
       page: 0,
-      // meta: {
-      //   page: 1,
-      //   pageSize: INDEX_PAGE_SIZE_DEFAULT,
-      //   pageSizeOptions: INDEX_PAGE_SIZE_OPTIONS,
-      //   pageTotal: 1,
-      //   total: 0,
-      // },
     };
     this.translations = {
       previousText: this.props.t("ReactTable.PREVIOUS"),
@@ -60,7 +43,6 @@ class EntityResponsibilityComponent extends Component {
     };
   }
   componentDidMount = () => {
-    //this.props.dispatch(getAllUsers());
     this.props.dispatch(getAllSubCategories());
   };
 
@@ -241,14 +223,7 @@ class EntityResponsibilityComponent extends Component {
                 </Button>
               </Col>
               <Col md={3} className="ml-auto">
-                <InputGroup>
-                  {/* <InputGroupAddon addonType="prepend">
-                    <div className="input-group-text">
-                      <FontAwesomeIcon icon={faSearch} />
-                    </div>
-                  </InputGroupAddon>
-                  <Input placeholder="Search..." /> */}
-                </InputGroup>
+                <InputGroup></InputGroup>
               </Col>
             </Row>
           </Card>
@@ -274,18 +249,9 @@ class EntityResponsibilityComponent extends Component {
                         ],
                       },
                     ]}
-                    // manual
-                    // pages={this.state.meta.total}
                     defaultPageSize={10}
                     page={this.state.page}
                     onPageChange={(page) => this.setState({ page })}
-                    // defaultPageSize={this.state.meta.pageSize}
-                    // onFetchData={(state, instance) => {
-                    //   let queryString = `?page=${state.page + 1}&pageSize=${
-                    //     state.pageSize
-                    //   }`;
-                    //   this.props.dispatch(getAllSubCategories(queryString));
-                    // }}
                     className="-highlight"
                     {...this.translations}
                   />
@@ -294,7 +260,6 @@ class EntityResponsibilityComponent extends Component {
             </Col>
           </Row>
         </ReactCSSTransitionGroup>
-        {/* <FooterComponent /> */}
       </Fragment>
     );
   }
@@ -315,7 +280,7 @@ function mapStateToProps(state) {
     isDeleteSubCategoryFailure: state.SubCategory.isDeleteSubCategoryFailure,
   };
 }
-//export default translate(SubCategoryComponent);
+
 export default compose(
   translate,
   withRouter,

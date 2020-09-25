@@ -4,7 +4,7 @@ import { translate } from "react-multi-lang";
 import compose from "compose-function";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   INDEX_PAGE_SIZE_DEFAULT,
   INDEX_PAGE_SIZE_OPTIONS,
@@ -12,10 +12,9 @@ import {
   canManage,
   permissions,
 } from "../../Helpers/utils";
-import ReactApexChart from "react-apexcharts";
+
 import { Row, Col, Card, CardBody } from "reactstrap";
-import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
-import Circle from "react-circle";
+
 import CategoryGraph from "../StatisticsComponent/Graphs/categoryGraph";
 import EntityBarGraph from "../StatisticsComponent/Graphs/entityBarGraph";
 import EntityPercentageGraph from "../StatisticsComponent/Graphs/entityPercentageGraph";
@@ -112,7 +111,6 @@ class claimStatistics extends Component {
   render() {
     return (
       <Fragment>
-        {/* <MainLoader className="text-center" loading={this.state.mainLoader} /> */}
         <ReactCSSTransitionGroup
           component="div"
           transitionName="TabsAnimation"
@@ -162,7 +160,6 @@ class claimStatistics extends Component {
                         entityName={this.state.entityName}
                         percentageRate={this.state.percentageRate}
                         totalCount={this.state.totalCount}
-                        // lessPercentageRate={this.state.lessPercentageRate}
                       />
                     </div>
                   </CardBody>
@@ -175,14 +172,7 @@ class claimStatistics extends Component {
                 <Card className="main-card mb-3">
                   <CardBody className="text-center">
                     <span>{this.props.t("Statistics.CLAIM_ENTITIES")}</span>
-                    <div id="chart">
-                      {/* <EntityBarGraph
-                        entityName={this.state.entityName}
-                        percentageRate={this.state.percentageRate}
-                        totalCount={this.state.totalCount}
-                        // lessPercentageRate={this.state.lessPercentageRate}
-                      /> */}
-                    </div>
+                    <div id="chart"></div>
                   </CardBody>
                 </Card>
               </Col>
@@ -212,20 +202,13 @@ class claimStatistics extends Component {
                 <Card className="main-card mb-3">
                   <CardBody className="text-center">
                     <span>{this.props.t("Statistics.PERCENTAGE_RATE")}</span>
-                    <div id="chart">
-                      {/* <EntityPercentageGraph
-                        entityName={this.state.entityName}
-                        percentageRate={this.state.percentageRate}
-                        totalCount={this.state.totalCount}
-                      /> */}
-                    </div>
+                    <div id="chart"></div>
                   </CardBody>
                 </Card>
               </Col>
             </Row>
           )}
         </ReactCSSTransitionGroup>
-        {/* <FooterComponent /> */}
       </Fragment>
     );
   }

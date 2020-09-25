@@ -17,8 +17,6 @@ import {
   Breadcrumb,
   Label,
   BreadcrumbItem,
-  Button,
-  Collapse,
 } from "reactstrap";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -437,7 +435,7 @@ class ProcessAgentClaim extends Component {
                           <li className="list-group-item">
                             {this.props.t("Common.COMPLAINT_CHANNEL")} :{" "}
                             <b>
-                              {categoriesData && categoriesData
+                              {categoriesData
                                 ? categoriesData.claimChannel
                                 : "none"}
                             </b>
@@ -466,7 +464,7 @@ class ProcessAgentClaim extends Component {
                             {" "}
                             {this.props.t("Common.CATEGORY")} :{" "}
                             <b>
-                              {categoriesData && categoriesData
+                              {categoriesData
                                 ? getLangBasedDataLabel(categoriesData.category)
                                 : "none"}
                             </b>
@@ -474,7 +472,7 @@ class ProcessAgentClaim extends Component {
                           <li className="list-group-item">
                             {this.props.t("Common.SUB_CATEGORY")} :{" "}
                             <b>
-                              {categoriesData && categoriesData
+                              {categoriesData
                                 ? getLangBasedDataLabel(
                                     categoriesData.subCategory
                                   )
@@ -500,7 +498,7 @@ class ProcessAgentClaim extends Component {
                           <li className="list-group-item">
                             {this.props.t("Common.DEPATURE_STN")} :{" "}
                             <b>
-                              {categoriesData && categoriesData
+                              {categoriesData
                                 ? getLangBasedStationLabel(
                                     categoriesData.departureStation
                                   )
@@ -510,7 +508,7 @@ class ProcessAgentClaim extends Component {
                           <li className="list-group-item">
                             {this.props.t("Common.ARRIVAL_STN")} :{" "}
                             <b>
-                              {categoriesData && categoriesData
+                              {categoriesData
                                 ? getLangBasedStationLabel(
                                     categoriesData.arrivalStation
                                   )

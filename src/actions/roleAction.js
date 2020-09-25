@@ -1,13 +1,7 @@
-import { ROLE_CONST, ACCOUNT_ROLE_CONST } from "./actionTypes";
-import {
-  AXIOS_INSTANCE,
-  ROLE_API,
-  CONFIG,
-  ACCOUNT_ROLE_API,
-} from "./apiEndPoints";
-import { checkHttpStatus, parseJSON, handleLogoutRedirect } from "../utils";
+import { ROLE_CONST } from "./actionTypes";
+import { AXIOS_INSTANCE, ROLE_API, CONFIG } from "./apiEndPoints";
+import { checkHttpStatus, parseJSON } from "../utils";
 import * as base from "./baseAction";
-import { actions } from "react-redux-form";
 
 export function addRole(roleParam) {
   return (dispatch) => {
@@ -167,35 +161,6 @@ export function assignRoleToUSer(roleParam) {
       });
   };
 }
-// //Confirm forgotten password
-// export function assignRoleToUSer(requestParam) {
-//   return (dispatch) => {
-//     dispatch(base.getRequest(ROLE_CONST.ASSIGN_ROLE_REQUEST));
-//     AXIOS_INSTANCE.post(`${ROLE_API}/UpdateAssignRoleToUser`, requestParam)
-//       .then(checkHttpStatus)
-//       .then(parseJSON)
-//       .then((result) => {
-//         if (result.isSuccess) {
-//           dispatch(
-//             base.getSuccess(ROLE_CONST.ASSIGN_ROLE_SUCCESS, {
-//               response: {
-//                 data: result,
-//               },
-//             })
-//           );
-//         } else {
-//           dispatch(
-//             base.getFailure(ROLE_CONST.ASSIGN_ROLE_FAILURE, {
-//               response: result,
-//             })
-//           );
-//         }
-//       })
-//       .catch((error) => {
-//         dispatch(base.handleCatch(ROLE_CONST.ASSIGN_ROLE_FAILURE, error));
-//       });
-//   };
-// }
 
 // delete role
 export function deleteRole(roleIdParam) {

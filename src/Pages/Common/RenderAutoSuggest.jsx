@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Input, FormFeedback, FormText,CustomInput } from "reactstrap";
+import { FormFeedback, FormText } from "reactstrap";
 import Autosuggest from 'react-autosuggest';
 
 const getSuggestionValue = suggestion => {

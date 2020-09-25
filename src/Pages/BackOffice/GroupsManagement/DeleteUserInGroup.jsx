@@ -1,18 +1,13 @@
-import React, { Fragment, Component } from "react";
-import { reduxForm, Field, change } from "redux-form";
+import React, { Fragment } from "react";
+import { reduxForm, Field } from "redux-form";
 import { translate } from "react-multi-lang";
 import { connect } from "react-redux";
 import compose from "compose-function";
 import { withRouter } from "react-router-dom";
-import { AvForm, AvField } from "availity-reactstrap-validation";
-import {
-  renderTextField,
-  renderSelectField,
-} from "../../Common/RenderTextField";
+import { AvForm } from "availity-reactstrap-validation";
 import { showSuccess, showError, required } from "../../Helpers/utils";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
@@ -23,7 +18,6 @@ import {
   Label,
 } from "reactstrap";
 import RenderSelectMultiInput from "../../Common/renderMultipleInput";
-import { getAllUsers } from "../../../actions/accountAction";
 import {
   getUserByGroupId,
   deleteUserInGroup,
@@ -35,8 +29,6 @@ class DeleteUserInGroup extends React.Component {
     this.state = {
       modal: false,
     };
-
-    //this.toggle = this.toggle.bind(this);
   }
   componentDidMount = () => {
     this.props.dispatch(getUserByGroupId(this.props.groupId));
@@ -86,8 +78,6 @@ class DeleteUserInGroup extends React.Component {
     }
   }
 
-  // deleteUserInGroup = () => {};
-
   onSubmit = (formProps) => {
     if (formProps.userName) {
       const requestData = {
@@ -111,11 +101,7 @@ class DeleteUserInGroup extends React.Component {
 
     return (
       <Fragment>
-        <Modal
-          isOpen={this.props.modal}
-          toggle={this.toggle}
-          // className="modalSize"
-        >
+        <Modal isOpen={this.props.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>
             <h4 className="font-weight-bold">
               {this.props.t("Common.DELETE_USER_IN_GROUP")}
@@ -165,8 +151,6 @@ class DeleteUserInGroup extends React.Component {
 
 DeleteUserInGroup = reduxForm({
   form: "AddUserInGroup",
-  //validate,
-  // asyncValidate,
 })(DeleteUserInGroup);
 function mapStateToProps(state) {
   return {

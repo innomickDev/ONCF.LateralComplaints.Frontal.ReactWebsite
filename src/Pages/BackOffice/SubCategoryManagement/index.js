@@ -8,12 +8,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  INDEX_PAGE_SIZE_DEFAULT,
-  INDEX_PAGE_SIZE_OPTIONS,
-  showSuccess,
-  showError,
-} from "../../Helpers/utils";
+import { showSuccess, showError } from "../../Helpers/utils";
 
 // api calls
 import {
@@ -24,10 +19,7 @@ import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import AddSubCategory from "./AddSubCategory";
 import {
-  getLangBasedValues,
   getLangBasedDataLabel,
-  LANG_CODES,
-  getLangBasedItem,
   canManage,
   permissions,
 } from "../../Helpers/utils";
@@ -43,13 +35,6 @@ class SubCategoryComponent extends Component {
       isShowRolesModal: false,
       mainLoader: true,
       page: 0,
-      // meta: {
-      //   page: 1,
-      //   pageSize: INDEX_PAGE_SIZE_DEFAULT,
-      //   pageSizeOptions: INDEX_PAGE_SIZE_OPTIONS,
-      //   pageTotal: 1,
-      //   total: 0,
-      // },
     };
     this.translations = {
       previousText: this.props.t("ReactTable.PREVIOUS"),
@@ -67,7 +52,6 @@ class SubCategoryComponent extends Component {
     }
   };
   componentDidMount = () => {
-    //this.props.dispatch(getAllUsers());
     this.props.dispatch(getAllSubCategories());
   };
 
@@ -104,7 +88,6 @@ class SubCategoryComponent extends Component {
         nextProps.isAddSubCategorySuccess &&
         nextProps.isAddSubCategorySuccess !== this.props.isAddSubCategorySuccess
       ) {
-        // let queryString = `?page=${1}&pageSize=${10}`;
         this.props.dispatch(getAllSubCategories());
       }
       if (
@@ -112,7 +95,6 @@ class SubCategoryComponent extends Component {
         nextProps.isUpdateSubCategorySuccess !==
           this.props.isUpdateSubCategorySuccess
       ) {
-        // let queryString = `?page=${1}&pageSize=${10}`;
         this.props.dispatch(getAllSubCategories());
         showSuccess(this.props.t("Common.UPDATE_SUCCESS"));
       }
@@ -125,7 +107,7 @@ class SubCategoryComponent extends Component {
         this.setState({
           loading: false,
         });
-        // let queryString = `?page=${1}&pageSize=${10}`;
+
         this.props.dispatch(getAllSubCategories());
       }
       if (
@@ -229,9 +211,8 @@ class SubCategoryComponent extends Component {
                       </a>
                     </BreadcrumbItem>
                     <BreadcrumbItem>
-                      {/* <a href="javascript:void(0);"> */}{" "}
+                      {" "}
                       {this.props.t("Common.SUB_CATEGORY_MGMT")}
-                      {/* </a> */}
                     </BreadcrumbItem>
                   </Breadcrumb>
                 </div>
@@ -291,15 +272,6 @@ class SubCategoryComponent extends Component {
                                 <div className="widget-content p-0">
                                   <div className="widget-content-wrapper">
                                     <div className="ml-4 d-inline">
-                                      {/* <Button
-                                        className="btn btn-success"
-                                        title={this.props.t("Common.ADD_ROLE")}
-                                        onClick={e =>
-                                          this.showRolesModal(row.index)
-                                        }
-                                      >
-                                        <i className="fa fa-user"></i>
-                                      </Button>{" "} */}
                                       <Button
                                         className="btn btn-warning"
                                         title={this.props.t("Common.UPDATE")}
@@ -338,18 +310,9 @@ class SubCategoryComponent extends Component {
                         ],
                       },
                     ]}
-                    // manual
-                    // pages={this.state.meta.total}
                     defaultPageSize={10}
                     page={this.state.page}
                     onPageChange={(page) => this.setState({ page })}
-                    // defaultPageSize={this.state.meta.pageSize}
-                    // onFetchData={(state, instance) => {
-                    //   let queryString = `?page=${state.page + 1}&pageSize=${
-                    //     state.pageSize
-                    //   }`;
-                    //   this.props.dispatch(getAllSubCategories(queryString));
-                    // }}
                     className="-highlight"
                     {...this.translations}
                   />
@@ -358,7 +321,6 @@ class SubCategoryComponent extends Component {
             </Col>
           </Row>
         </ReactCSSTransitionGroup>
-        {/* <FooterComponent /> */}
       </Fragment>
     );
   }

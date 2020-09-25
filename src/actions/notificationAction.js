@@ -1,7 +1,6 @@
 import { NOTIFICATION } from "./actionTypes";
-import { AXIOS_INSTANCE, NOTIFICATION_API, LOGIN_CONFIG } from "./apiEndPoints";
+import { AXIOS_INSTANCE, NOTIFICATION_API } from "./apiEndPoints";
 import { checkHttpStatus, parseJSON } from "../utils";
-import { canManage, permissions } from "../Pages/Helpers/utils";
 import * as base from "./baseAction";
 
 // Get Notification By user code

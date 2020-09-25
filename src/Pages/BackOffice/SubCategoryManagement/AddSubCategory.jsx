@@ -9,7 +9,6 @@ import { renderTextField } from "../../Common/RenderTextField";
 import {
   showSuccess,
   showError,
-  getLangBasedItem,
   getLangBasedDataLabel,
   ENG_REGEX,
   FRENCH_REGEX,
@@ -140,11 +139,7 @@ class AddSubCategories extends React.Component {
 
     return (
       <Fragment>
-        <Modal
-          isOpen={this.props.modal}
-          toggle={this.toggle}
-          // className="modalSize"
-        >
+        <Modal isOpen={this.props.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>
             <h4 className="font-weight-bold">
               {this.props.initialValues
@@ -266,7 +261,6 @@ class AddSubCategories extends React.Component {
                       ? `${this.props.t("Common.UPDATE_SUB_CATEGORY")}`
                       : `${this.props.t("Common.ADD_SUB_CATEGORY")}`
                   }
-                  // label="Add SubCategories"
                   className="btn btn-success"
                   loading={this.state.loading}
                   submitting={""}
@@ -284,8 +278,6 @@ class AddSubCategories extends React.Component {
 
 AddSubCategories = reduxForm({
   form: "AddSubCategories",
-  //validate,
-  // asyncValidate,
 })(AddSubCategories);
 function mapStateToProps(state) {
   return {

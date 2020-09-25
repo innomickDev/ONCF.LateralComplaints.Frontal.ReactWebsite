@@ -8,12 +8,8 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 
-//
-// import FooterComponent from "./Footer";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  dateFormat,
   INDEX_PAGE_SIZE_DEFAULT,
   INDEX_PAGE_SIZE_OPTIONS,
   showSuccess,
@@ -29,7 +25,7 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 import AddGroup from "./AddGroup";
 import AddUserInGroup from "./AddUserInGroup";
 import DeleteUserInGroup from "./DeleteUserInGroup";
-import { getLangBasedValues, LANG_CODES } from "../../Helpers/utils";
+
 import MainLoader from "../../Common/Loader";
 class GroupComponent extends Component {
   constructor(props) {
@@ -60,7 +56,6 @@ class GroupComponent extends Component {
     };
   }
   componentDidMount = () => {
-    //this.props.dispatch(getAllUsers());
     this.props.dispatch(getGroups());
   };
 
@@ -70,23 +65,6 @@ class GroupComponent extends Component {
         nextProps.groupsData &&
         nextProps.groupsData !== this.props.groupsData
       ) {
-        // const meta = {
-        //   page: nextProps.groupsData.data.pagination.page,
-        //   pageSize: nextProps.groupsData.data.pagination.pageSize,
-        //   pageSizeOptions: INDEX_PAGE_SIZE_OPTIONS,
-        //   pageTotal: 1,
-        //   total:
-        //     nextProps.groupsData.data.pagination.total %
-        //     nextProps.groupsData.data.pagination.pageSize
-        //       ? parseInt(
-        //           nextProps.groupsData.data.pagination.total /
-        //             nextProps.groupsData.data.pagination.pageSize
-        //         ) + 1
-        //       : parseInt(
-        //           nextProps.groupsData.data.pagination.total /
-        //             nextProps.groupsData.data.pagination.pageSize
-        //         ),
-        // };
         this.setState({ mainLoader: false });
         let groups = [];
         if (nextProps.groupsData && nextProps.groupsData.length)
@@ -105,10 +83,6 @@ class GroupComponent extends Component {
         nextProps.addGroupSuccess &&
         nextProps.addGroupSuccess !== this.props.addGroupSuccess
       ) {
-        // let queryString = `?page=${1}&pageSize=${10}`;
-        // this.props.dispatch(getStations(queryString));
-
-        // let queryString = `?page=${1}&pageSize=${10}`;
         this.props.dispatch(getGroups({ page: 1, pageSize: 10 }));
       }
 
@@ -120,7 +94,7 @@ class GroupComponent extends Component {
         this.setState({
           loading: false,
         });
-        // let queryString = `?page=${1}&pageSize=${10}`;
+
         this.props.dispatch(getGroups({ page: 1, pageSize: 10 }));
       }
       if (
@@ -136,7 +110,6 @@ class GroupComponent extends Component {
         nextProps.isUpdateSuccess &&
         nextProps.isUpdateSuccess !== this.props.isUpdateSuccess
       ) {
-        // let queryString = `?page=${1}&pageSize=${10}`;
         this.props.dispatch(getGroups({ page: 1, pageSize: 10 }));
         this.setState({ loading: false });
       }
@@ -280,9 +253,7 @@ class GroupComponent extends Component {
                   </div>
                   <div>
                     {this.props.t("Common.GROUP_MGMT")}
-                    <div className="page-title-subheading">
-                      {/* {this.props.t("Common.MEMBER_LIST_SUB")} */}
-                    </div>
+                    <div className="page-title-subheading"></div>
                   </div>
                 </div>
                 <div className="page-title-actions">
@@ -314,14 +285,7 @@ class GroupComponent extends Component {
                 </Button>
               </Col>
               <Col md={3} className="ml-auto">
-                <InputGroup>
-                  {/* <InputGroupAddon addonType="prepend">
-                    <div className="input-group-text">
-                      <FontAwesomeIcon icon={faSearch} />
-                    </div>
-                  </InputGroupAddon>
-                  <Input placeholder="Search..." /> */}
-                </InputGroup>
+                <InputGroup></InputGroup>
               </Col>
             </Row>
           </Card>
@@ -419,7 +383,6 @@ class GroupComponent extends Component {
             </Col>
           </Row>
         </ReactCSSTransitionGroup>
-        {/* <FooterComponent /> */}
       </Fragment>
     );
   }

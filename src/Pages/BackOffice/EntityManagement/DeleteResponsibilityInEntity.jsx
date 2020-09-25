@@ -1,23 +1,17 @@
-import React, { Fragment, Component } from "react";
-import { reduxForm, Field, change } from "redux-form";
+import React, { Fragment } from "react";
+import { reduxForm, Field } from "redux-form";
 import { translate } from "react-multi-lang";
 import { connect } from "react-redux";
 import compose from "compose-function";
 import { withRouter } from "react-router-dom";
-import { AvForm, AvField } from "availity-reactstrap-validation";
-import {
-  renderTextField,
-  renderSelectField,
-} from "../../Common/RenderTextField";
+import { AvForm } from "availity-reactstrap-validation";
 import {
   showSuccess,
   showError,
-  required,
   getLangBasedDataLabel,
 } from "../../Helpers/utils";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
@@ -114,11 +108,7 @@ class DeleteResponsibilityInEntity extends React.Component {
 
     return (
       <Fragment>
-        <Modal
-          isOpen={this.props.modal}
-          toggle={this.toggle}
-          // className="modalSize"
-        >
+        <Modal isOpen={this.props.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>
             <h4 className="font-weight-bold">
               {this.props.t("Common.DELETE_RESPOSIBILITY_IN_ENTITY")}
@@ -168,8 +158,6 @@ class DeleteResponsibilityInEntity extends React.Component {
 
 DeleteResponsibilityInEntity = reduxForm({
   form: "DeleteResponsibilityInEntity",
-  //validate,
-  // asyncValidate,
 })(DeleteResponsibilityInEntity);
 function mapStateToProps(state) {
   return {

@@ -1,13 +1,5 @@
 import React, { Fragment, Component } from "react";
-import {
-  Row,
-  Col,
-  Card,
-  CardBody,
-  InputGroup,
-  Button,
-  CardHeader,
-} from "reactstrap";
+import { Row, Col, Card, CardBody, CardHeader } from "reactstrap";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import { translate } from "react-multi-lang";
 import ReactTable from "react-table";
@@ -16,8 +8,6 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 
-//
-// import FooterComponent from "./Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   dateTimeFormat,
@@ -39,7 +29,6 @@ import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import Filtercomponent from "./FilterComponent";
 
-import { stat } from "fs-extra";
 import MainLoader from "../../Common/Loader";
 
 class ReportComponent extends Component {
@@ -255,9 +244,8 @@ class ReportComponent extends Component {
                       </a>
                     </BreadcrumbItem>
                     <BreadcrumbItem>
-                      {/* <a href="javascript:void(0);"> */}{" "}
+                      {" "}
                       {this.props.t("Sidebar.REPORT")}
-                      {/* </a> */}
                     </BreadcrumbItem>
                   </Breadcrumb>
                 </div>
@@ -283,21 +271,14 @@ class ReportComponent extends Component {
                       <div className="my-3 text-left"></div>
                     </Col>
                     <Col lg={4}>
-                    <SubmitBtnLoader
-                                  label={this.props.t("Common.EXPORT_IN_EXCEL")}
-                                  className="btn btn-primary float-right mt-2"
-                                  loading={this.state.isRequest}
-                                  submitting={""}
-                                  onClick={(e) => this.exportData(enumData)}
-                                />
-                      {/* <button
+                      <SubmitBtnLoader
+                        label={this.props.t("Common.EXPORT_IN_EXCEL")}
                         className="btn btn-primary float-right mt-2"
+                        loading={this.state.isRequest}
+                        submitting={""}
                         onClick={(e) => this.exportData(enumData)}
-                        disabled={this.state.isRequest}
-                      >
-                        {this.props.t("Common.EXPORT_IN_EXCEL")}
-                      </button>
-                      */}
+                      />
+
                       <br />
                       <a
                         id="claimId"
@@ -328,7 +309,7 @@ class ReportComponent extends Component {
                             accessor: "EventLocation",
                             Cell: (row) => (
                               <div>
-                                {row.value && row.value ? row.value : "Aucun"}
+                                {row.value ? row.value : "Aucun"}
                               </div>
                             ),
                           },
@@ -346,7 +327,7 @@ class ReportComponent extends Component {
                             accessor: "actionTaken",
                             Cell: (row) => (
                               <div>
-                                {row.value && row.value ? row.value : "Aucune"}
+                                {row.value ? row.value : "Aucune"}
                               </div>
                             ),
                           },
@@ -426,7 +407,7 @@ class ReportComponent extends Component {
 function mapStateToProps(state) {
   return {
     exportData: state.Claim.exportData,
-    isRequest:state.Claim.isRequest,
+    isRequest: state.Claim.isRequest,
     isLoading: state.Claim.isLoading,
     exportDataError: state.Claim.exportDataError,
     emailData: state.Email.emailData

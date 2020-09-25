@@ -8,12 +8,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  INDEX_PAGE_SIZE_DEFAULT,
-  INDEX_PAGE_SIZE_OPTIONS,
-  showSuccess,
-  showError,
-} from "../../Helpers/utils";
+import { showSuccess, showError } from "../../Helpers/utils";
 // api calls
 import {
   getAllSubSubCategories,
@@ -23,10 +18,7 @@ import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import AddSubSubCategory from "./AddSubSubCategory";
 import {
-  getLangBasedValues,
   getLangBasedDataLabel,
-  LANG_CODES,
-  getLangBasedItem,
   canManage,
   permissions,
 } from "../../Helpers/utils";
@@ -41,13 +33,6 @@ class SubSubCategoryComponent extends Component {
       mainLoader: true,
       isShowRolesModal: false,
       page: 0,
-      // meta: {
-      //   page: 1,
-      //   pageSize: INDEX_PAGE_SIZE_DEFAULT,
-      //   pageSizeOptions: INDEX_PAGE_SIZE_OPTIONS,
-      //   pageTotal: 1,
-      //   total: 0,
-      // },
     };
     this.translations = {
       previousText: this.props.t("ReactTable.PREVIOUS"),
@@ -66,7 +51,6 @@ class SubSubCategoryComponent extends Component {
     }
   };
   componentDidMount = () => {
-    //this.props.dispatch(getAllUsers());
     this.props.dispatch(getAllSubSubCategories());
   };
 
@@ -81,7 +65,6 @@ class SubSubCategoryComponent extends Component {
         let subSubCategories = [];
         if (nextProps.subSubCategoryData && nextProps.subSubCategoryData.length)
           nextProps.subSubCategoryData.map((subSubCategory, key) => {
-            // console.log(subSubCategory);
             subSubCategories.push({
               id: parseInt(subSubCategory.code),
               nameFrench: subSubCategory.labelFr,
@@ -106,7 +89,6 @@ class SubSubCategoryComponent extends Component {
         nextProps.isAddSubSubCategorySuccess !==
           this.props.isAddSubSubCategorySuccess
       ) {
-        // let queryString = `?page=${1}&pageSize=${10}`;
         this.props.dispatch(getAllSubSubCategories());
       }
       if (
@@ -218,9 +200,7 @@ class SubSubCategoryComponent extends Component {
                   </div>
                   <div>
                     {this.props.t("Common.SUB_SUB_CATEGORY_MGMT")}
-                    <div className="page-title-subheading">
-                      {/* {this.props.t("Common.MEMBER_LIST_SUB")} */}
-                    </div>
+                    <div className="page-title-subheading"></div>
                   </div>
                 </div>
                 <div className="page-title-actions">
@@ -231,9 +211,8 @@ class SubSubCategoryComponent extends Component {
                       </a>
                     </BreadcrumbItem>
                     <BreadcrumbItem>
-                      {/* <a href="javascript:void(0);"> */}{" "}
+                      {" "}
                       {this.props.t("Common.SUB_SUB_CATEGORY_MGMT")}
-                      {/* </a> */}
                     </BreadcrumbItem>
                   </Breadcrumb>
                 </div>
@@ -251,14 +230,7 @@ class SubSubCategoryComponent extends Component {
                 </Button>
               </Col>
               <Col md={3} className="ml-auto">
-                <InputGroup>
-                  {/* <InputGroupAddon addonType="prepend">
-                    <div className="input-group-text">
-                      <FontAwesomeIcon icon={faSearch} />
-                    </div>
-                  </InputGroupAddon>
-                  <Input placeholder="Search..." /> */}
-                </InputGroup>
+                <InputGroup></InputGroup>
               </Col>
             </Row>
           </Card>
@@ -300,15 +272,6 @@ class SubSubCategoryComponent extends Component {
                                 <div className="widget-content p-0">
                                   <div className="widget-content-wrapper">
                                     <div className="ml-4 d-inline">
-                                      {/* <Button
-                                        className="btn btn-success"
-                                        title={this.props.t("Common.ADD_ROLE")}
-                                        onClick={e =>
-                                          this.showRolesModal(row.index)
-                                        }
-                                      >
-                                        <i className="fa fa-user"></i>
-                                      </Button>{" "} */}
                                       <Button
                                         className="btn btn-warning"
                                         title={this.props.t("Common.UPDATE")}
@@ -358,7 +321,6 @@ class SubSubCategoryComponent extends Component {
             </Col>
           </Row>
         </ReactCSSTransitionGroup>
-        {/* <FooterComponent /> */}
       </Fragment>
     );
   }

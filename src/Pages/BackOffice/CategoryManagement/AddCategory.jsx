@@ -1,5 +1,5 @@
-import React, { Fragment, Component } from "react";
-import { reduxForm, Field, change } from "redux-form";
+import React, { Fragment } from "react";
+import { reduxForm, Field } from "redux-form";
 import { translate } from "react-multi-lang";
 import { connect } from "react-redux";
 import compose from "compose-function";
@@ -16,7 +16,6 @@ import {
 } from "../../Helpers/utils";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
@@ -24,7 +23,6 @@ import {
   FormGroup,
   Row,
   Col,
-  Label,
 } from "reactstrap";
 
 import { addCategory, updateCategory } from "../../../actions/categoryAction";

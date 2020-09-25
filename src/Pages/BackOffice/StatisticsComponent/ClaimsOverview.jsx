@@ -12,7 +12,7 @@ import {
   permissions,
   showError,
 } from "../../Helpers/utils";
-import ReactApexChart from "react-apexcharts";
+
 import { Row, Col, Card, CardBody } from "reactstrap";
 import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import Circle from "react-circle";
@@ -103,11 +103,9 @@ class ClaimsOverviewStat extends Component {
   };
 
   render() {
-    const claimStat = this.state.claimStat;
     const claimsDetail = this.state.claimsDetail;
     return (
       <Fragment>
-        {/* <MainLoader className="text-center" loading={this.state.mainLoader} /> */}
         <ReactCSSTransitionGroup
           component="div"
           transitionName="TabsAnimation"
@@ -298,7 +296,6 @@ class ClaimsOverviewStat extends Component {
             ""
           )}
         </ReactCSSTransitionGroup>
-        {/* <FooterComponent /> */}
       </Fragment>
     );
   }

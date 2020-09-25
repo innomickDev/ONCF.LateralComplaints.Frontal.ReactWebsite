@@ -1,5 +1,5 @@
 import { RESPONSIBILITY } from "./actionTypes";
-import { AXIOS_INSTANCE, RESPONSIBILITY_API, CONFIG } from "./apiEndPoints";
+import { AXIOS_INSTANCE, RESPONSIBILITY_API } from "./apiEndPoints";
 import { checkHttpStatus, parseJSON } from "../utils";
 import * as base from "./baseAction";
 

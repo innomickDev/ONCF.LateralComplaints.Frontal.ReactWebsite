@@ -2,7 +2,7 @@
 import React, {Component, Fragment} from "react";
 import Loader from 'react-loaders'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import {Row, Col, Card, CardBody, CardTitle } from 'reactstrap';
+import {Row, Col } from 'reactstrap';
 import { withRouter} from 'react-router-dom';
 import { connect } from "react-redux";
 import compose from "compose-function";

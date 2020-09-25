@@ -1,36 +1,28 @@
 import React, { Fragment, Component } from "react";
-import { Row, Col, Card, CardBody, InputGroup, Button } from "reactstrap";
+import { Row, Col, Card, CardBody, Button } from "reactstrap";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import { translate } from "react-multi-lang";
 import ReactTable from "react-table";
 import compose from "compose-function";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import SubmitBtnLoader from "../../Common/ButtonLoader";
 
-//
-// import FooterComponent from "./Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  dateFormat,
   dateTimeFormat,
   INDEX_PAGE_SIZE_DEFAULT,
   INDEX_PAGE_SIZE_OPTIONS,
   canManage,
   permissions,
-  showSuccess,
-  showError,
-  getLangBasedValues,
-  LANG_CODES,
 } from "../../Helpers/utils";
 
 // api calls
-import { getResponse, deleteResponse } from "../../../actions/responseAction";
+import { deleteResponse } from "../../../actions/responseAction";
 import { getEmailTemplates } from "../../../actions/emailTemplateAction";
 import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import UpdateEmail from "./updateEmail";
-import { stat } from "fs-extra";
+
 import MainLoader from "../../Common/Loader";
 
 class ResponseComponent extends Component {
@@ -68,7 +60,6 @@ class ResponseComponent extends Component {
     }
   };
   componentDidMount = () => {
-    //this.props.dispatch(getAllUsers());
     this.props.dispatch(getEmailTemplates());
   };
 
@@ -102,8 +93,6 @@ class ResponseComponent extends Component {
         nextProps.updateEmailData &&
         nextProps.updateEmailData !== this.props.updateEmailData
       ) {
-        // let queryString = `?page=${1}&pageSize=${10}`;
-        // this.props.dispatch(getEmailTemplates({ page: 1, pageSize: 10 }));
         this.props.dispatch(getEmailTemplates());
       }
     }
@@ -178,9 +167,7 @@ class ResponseComponent extends Component {
                   </div>
                   <div>
                     {this.props.t("Common.EMAIL_MGMT")}
-                    <div className="page-title-subheading">
-                      {/* {this.props.t("Common.MEMBER_LIST_SUB")} */}
-                    </div>
+                    <div className="page-title-subheading"></div>
                   </div>
                 </div>
                 <div className="page-title-actions">
@@ -191,9 +178,8 @@ class ResponseComponent extends Component {
                       </a>
                     </BreadcrumbItem>
                     <BreadcrumbItem>
-                      {/* <a href="javascript:void(0);"> */}{" "}
+                      {" "}
                       {this.props.t("Common.EMAIL_MGMT")}
-                      {/* </a> */}
                     </BreadcrumbItem>
                   </Breadcrumb>
                 </div>
@@ -214,10 +200,7 @@ class ResponseComponent extends Component {
                             Header: header.title,
                             accessor: "title",
                           },
-                          // {
-                          //   Header: header.body,  //removing after clients update
-                          //   accessor: "body",
-                          // },
+
                           {
                             Header: header.createDate,
                             accessor: "createDate",
@@ -238,15 +221,6 @@ class ResponseComponent extends Component {
                                 <div className="widget-content p-0">
                                   <div className="widget-content-wrapper">
                                     <div className="d-inline">
-                                      {/* <Button
-                                        className="btn btn-success"
-                                        title={this.props.t("Common.ADD_ROLE")}
-                                        onClick={e =>
-                                          this.showRolesModal(row.index)
-                                        }
-                                      >
-                                        <i className="fa fa-user"></i>
-                                      </Button>{" "} */}
                                       <Button
                                         className="btn btn-warning"
                                         title={this.props.t(
@@ -258,24 +232,6 @@ class ResponseComponent extends Component {
                                       >
                                         <i className="fa fa-edit"></i>
                                       </Button>{" "}
-                                      {/* <SubmitBtnLoader
-                                        className="btn btn-primary"
-                                        title={this.props.t("Common.DELETE")}
-                                        onClick={e =>
-                                          this.deleteEmailBody(
-                                            row.index,
-                                            row.original.actions.key
-                                          )
-                                        }
-                                        label={
-                                          <i className="fa fa-trash-alt"></i>
-                                        }
-                                        loading={
-                                          row.original.actions.key ===
-                                            this.state.rowKey &&
-                                          this.state.loading
-                                        }
-                                      /> */}
                                     </div>
                                   </div>
                                 </div>
@@ -285,18 +241,7 @@ class ResponseComponent extends Component {
                         ],
                       },
                     ]}
-                    // manual
-                    // pages={this.state.meta.total}
-                    // defaultPageSize={this.state.meta.pageSize}
                     defaultPageSize={10}
-                    // onFetchData={(state, instance) => {
-                    // let queryString = {
-                    // page: state.page + 1,
-                    // pageSize: state.pageSize,
-                    // };
-
-                    //   this.props.dispatch(getEmailTemplates());
-                    // }}
                     className="-highlight"
                     {...this.translations}
                   />
@@ -305,7 +250,6 @@ class ResponseComponent extends Component {
             </Col>
           </Row>
         </ReactCSSTransitionGroup>
-        {/* <FooterComponent /> */}
       </Fragment>
     );
   }

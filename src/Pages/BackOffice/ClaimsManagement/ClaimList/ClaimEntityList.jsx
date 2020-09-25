@@ -1,15 +1,14 @@
-import React, { Fragment, Component } from "react";
-import { reduxForm, Field, change } from "redux-form";
+import React, { Fragment } from "react";
+import { reduxForm, Field } from "redux-form";
 import { translate } from "react-multi-lang";
 import { connect } from "react-redux";
 import compose from "compose-function";
 import { withRouter } from "react-router-dom";
-import { AvForm, AvField } from "availity-reactstrap-validation";
+import { AvForm } from "availity-reactstrap-validation";
 import { showSuccess, showError, required } from "../../../Helpers/utils";
 import SubmitBtnLoader from "../../../Common/ButtonLoader";
 import { renderSelectField } from "../../../Common/RenderTextField";
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
@@ -19,18 +18,11 @@ import {
   Col,
   Label,
 } from "reactstrap";
-import _ from "lodash";
-import RenderSelectMultiInput from "../../../Common/renderMultipleInput";
-import { getAgents } from "../../../../actions/accountAction";
 import {
-  getListEntity,
   getEntityByCode,
   getListEntityByResponsibility,
 } from "../../../../actions/entityAction";
-import {
-  assignClaimToAgent,
-  assignClaimToEntity,
-} from "../../../../actions/claimAction";
+import { assignClaimToEntity } from "../../../../actions/claimAction";
 
 class ClaimEntityList extends React.Component {
   constructor(props) {
@@ -163,9 +155,7 @@ class ClaimEntityList extends React.Component {
     }
   };
   showOptions = (data) => {
-    console.log(data);
     if (data && data.length) {
-      console.log(data && data.length);
       return data.map((entities, key) => {
         return (
           <option value={entities.value} key={key}>
@@ -174,14 +164,8 @@ class ClaimEntityList extends React.Component {
         );
       });
     }
-    // } else {
-    //   showError(this.props.t("ErrorMsg.ENTITY_NOT_AVAILABLE"));
-    // }
   };
   showUserOptions = (UserData) => {
-    console.log(UserData);
-    // console.log(UserData);
-
     if (UserData) {
       return (
         UserData.data &&
@@ -196,14 +180,6 @@ class ClaimEntityList extends React.Component {
         })
       );
     }
-    // } else if (
-    //   UserData &&
-    //   UserData.data &&
-    //   UserData.data.userClients &&
-    //   UserData.data.userClients.length === 0
-    // ) {
-    //   showError(this.props.t("ErrorMsg.ENTITY_NOT_AVAILABLE"));
-    // }
   };
 
   render() {

@@ -1,18 +1,14 @@
-import React, { Fragment, Component } from "react";
-import { reduxForm, Field, change } from "redux-form";
+import React, { Fragment } from "react";
+import { reduxForm, Field } from "redux-form";
 import { translate } from "react-multi-lang";
 import { connect } from "react-redux";
 import compose from "compose-function";
 import { withRouter } from "react-router-dom";
 import { AvForm, AvField } from "availity-reactstrap-validation";
-import {
-  renderTextField,
-  renderSelectField,
-} from "../../Common/RenderTextField";
-import { showSuccess, showError, required } from "../../Helpers/utils";
+import { renderTextField } from "../../Common/RenderTextField";
+import { showSuccess, showError } from "../../Helpers/utils";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
@@ -20,7 +16,6 @@ import {
   FormGroup,
   Row,
   Col,
-  Label,
 } from "reactstrap";
 
 import { addEntity, updateEntity } from "../../../actions/entityAction";
@@ -105,20 +100,9 @@ class AddEntity extends React.Component {
   render() {
     const { handleSubmit } = this.props;
 
-    const Checkbox = ({ input, meta: { touched, error } }) => (
-      <div style={{ border: touched && error ? "1px solid red" : "none" }}>
-        <input type="checkbox" {...input} />
-        <label>{this.props.t("Common.DEFAULT")}</label>
-      </div>
-    );
-
     return (
       <Fragment>
-        <Modal
-          isOpen={this.props.modal}
-          toggle={this.toggle}
-          // className="modalSize"
-        >
+        <Modal isOpen={this.props.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>
             <h4 className="font-weight-bold">
               {this.props.initialValues
@@ -160,15 +144,6 @@ class AddEntity extends React.Component {
                       }}
                     />
                   </FormGroup>
-                  {/* <FormGroup>
-                    <Field
-                      label={this.props.t("Common.DEFAULT")}
-                      type="checkbox"
-                      value="1"
-                      name="isDefault"
-                      component={Checkbox}
-                    />
-                  </FormGroup> */}
                 </Col>
               </Row>
               <div className="">

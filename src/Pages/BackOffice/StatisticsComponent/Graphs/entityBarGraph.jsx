@@ -3,7 +3,6 @@ import { translate } from "react-multi-lang";
 import {
   INDEX_PAGE_SIZE_DEFAULT,
   INDEX_PAGE_SIZE_OPTIONS,
-  getLangBasedDataLabel,
 } from "../../../Helpers/utils";
 import ReactApexChart from "react-apexcharts";
 
@@ -24,12 +23,6 @@ class EntityBarGraph extends Component {
         total: 0,
       },
       series: [
-        // {
-        //   name: this.props.t("Statistics.PERCENTAGE_RATE"),
-        //   type: "bar",
-        //   // data: [44, 55, 41, 64, 22, 43, 21],
-        //   data: this.props.percentageRate,
-        // },
         {
           name: this.props.t("Statistics.ENTITY_NAME"),
           type: "bar",
@@ -40,7 +33,6 @@ class EntityBarGraph extends Component {
       options: {
         colors: ["#f5b642"],
         chart: {
-          // toolbar: { show: false },
           type: "bar",
           height: 350,
         },

@@ -8,30 +8,24 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 
-//
-// import FooterComponent from "./Footer";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  dateFormat,
   dateTimeFormat,
   INDEX_PAGE_SIZE_DEFAULT,
   INDEX_PAGE_SIZE_OPTIONS,
   showSuccess,
   showError,
-  getLangBasedValues,
-  LANG_CODES,
   canManage,
   permissions,
 } from "../../Helpers/utils";
 
 // api calls
 import { getResponse, deleteResponse } from "../../../actions/responseAction";
-import { getStations, deleteStation } from "../../../actions/stationAction";
+
 import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import AddResponse from "./AddResponse";
-import { stat } from "fs-extra";
+
 import MainLoader from "../../Common/Loader";
 
 class ResponseComponent extends Component {
@@ -243,14 +237,7 @@ class ResponseComponent extends Component {
                 </Button>
               </Col>
               <Col md={3} className="ml-auto">
-                <InputGroup>
-                  {/* <InputGroupAddon addonType="prepend">
-                    <div className="input-group-text">
-                      <FontAwesomeIcon icon={faSearch} />
-                    </div>
-                  </InputGroupAddon>
-                  <Input placeholder="Search..." /> */}
-                </InputGroup>
+                <InputGroup></InputGroup>
               </Col>
             </Row>
           </Card>
@@ -268,10 +255,7 @@ class ResponseComponent extends Component {
                             Header: header.title,
                             accessor: "title",
                           },
-                          // {
-                          //   Header: header.body, //removed after clients remarks
-                          //   accessor: "body",
-                          // },
+
                           {
                             Header: header.createDate,
                             accessor: "createDate",
@@ -292,15 +276,6 @@ class ResponseComponent extends Component {
                                 <div className="widget-content p-0">
                                   <div className="widget-content-wrapper">
                                     <div className="ml-4 d-inline">
-                                      {/* <Button
-                                        className="btn btn-success"
-                                        title={this.props.t("Common.ADD_ROLE")}
-                                        onClick={e =>
-                                          this.showRolesModal(row.index)
-                                        }
-                                      >
-                                        <i className="fa fa-user"></i>
-                                      </Button>{" "} */}
                                       <Button
                                         className="btn btn-warning"
                                         title={this.props.t("Common.UPDATE")}
@@ -348,7 +323,6 @@ class ResponseComponent extends Component {
             </Col>
           </Row>
         </ReactCSSTransitionGroup>
-        {/* <FooterComponent /> */}
       </Fragment>
     );
   }

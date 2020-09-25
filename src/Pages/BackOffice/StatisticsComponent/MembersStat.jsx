@@ -4,7 +4,7 @@ import { translate } from "react-multi-lang";
 import compose from "compose-function";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-// import FooterComponent from "./Footer";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   INDEX_PAGE_SIZE_DEFAULT,
@@ -13,13 +13,13 @@ import {
   permissions,
   showError,
 } from "../../Helpers/utils";
-import ReactApexChart from "react-apexcharts";
+
 // api calls
 import { Row, Col, Card, CardBody } from "reactstrap";
-// import MainLoader from "../../Common/Loader";
+
 import { faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import Circle from "react-circle";
-// import avatar1 from "../../../assets/utils/images/avatars/1.jpg";
+
 import {
   getUsersStatistics,
   getUsersStatisticsReport,
@@ -123,11 +123,8 @@ class MembersStat extends Component {
   render() {
     const userStat = this.state.userStat;
 
-    const newUsersEmail = this.state.newUsersEmail;
-
     return (
       <Fragment>
-        {/* <MainLoader className="text-center" loading={this.state.mainLoader} /> */}
         <ReactCSSTransitionGroup
           component="div"
           transitionName="TabsAnimation"
@@ -364,7 +361,6 @@ class MembersStat extends Component {
             </Col>
           </Row>
         </ReactCSSTransitionGroup>
-        {/* <FooterComponent /> */}
       </Fragment>
     );
   }

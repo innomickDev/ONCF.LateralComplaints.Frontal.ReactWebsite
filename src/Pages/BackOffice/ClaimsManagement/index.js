@@ -42,11 +42,7 @@ import {
   EMAIL_REGEX,
   canManage,
   permissions,
-  PHONE_REGEX,
 } from "../../Helpers/utils";
-// import { getAllUsers } from "../../../actions/accountAction";
-// import RenderSelectMultiInput from "../../Common/renderMultipleInput";
-import { v1 as uuidv1 } from "uuid";
 
 class ClaimsManagement extends Component {
   constructor(props) {
@@ -68,7 +64,7 @@ class ClaimsManagement extends Component {
   };
   componentDidMount = () => {
     this.props.dispatch(getStations());
-    // this.props.dispatch(getAllUsers());
+
     this.props.dispatch(getCategories());
   };
   componentWillReceiveProps = (nextProps) => {
@@ -144,7 +140,6 @@ class ClaimsManagement extends Component {
       nextProps.subCategoryDataByCategoryError !==
         this.props.subCategoryDataByCategoryError
     ) {
-      // showError(this.props.t("ErrorMsg.NO_SUB_CATEGORY"));
       this.setState({
         loading: false,
       });
@@ -153,27 +148,10 @@ class ClaimsManagement extends Component {
       nextProps.subSubCategoryError &&
       nextProps.subSubCategoryError !== this.props.subSubCategoryError
     ) {
-      // showError(this.props.t("ErrorMsg.NO_SUB_SUB_CATEGORY"));
       this.setState({
         loading: false,
       });
     }
-    // getting user data
-    // if (nextProps.usersData && nextProps.usersData !== this.props.usersData) {
-    //   const usersData = nextProps.usersData;
-    //   let users = [];
-    //   usersData.userClients.map((user, key) => {
-    //     users.push({
-    //       value: user.code,
-    //       label: `${user.title} ${user.firstName} ${user.lastName} (${user.email})`,
-
-    //       email: user.email,
-    //       mobile: user.mobile,
-    //       city: user.city,
-    //     });
-    //     this.setState({ users });
-    //   });
-    // }
   };
 
   showStations = (data) => {
@@ -202,7 +180,6 @@ class ClaimsManagement extends Component {
   };
   // get sub category by categoryID
   getSubCategoriesByCategory = (e) => {
-    console.log(e.target.value)
     if (e.target.value !== "0") {
       const category = _.find(this.state.getCategoriesData.categoryClients, {
         code: e.target.value,
@@ -211,13 +188,11 @@ class ClaimsManagement extends Component {
       this.setState({ showSubSubCategory: category.isRequiredSubSubCategory });
 
       this.props.dispatch(getSubCategories(e.target.value));
-      // this.getSubSubCategoryBYSubCategory(e);
+
       this.setState({
-        subCategoryDataByCategory:[],
-        subSubCategoryDataBySubCategory:[]
-      })
-      
-     
+        subCategoryDataByCategory: [],
+        subSubCategoryDataBySubCategory: [],
+      });
     } else {
       this.setState({
         getSubCategoriesByCategory: [],
@@ -226,18 +201,16 @@ class ClaimsManagement extends Component {
   };
   //get Sub Sub-Category BY SubCategoryID
   getSubSubCategoryBYSubCategory = (e) => {
-    console.log(e.target.value)
-    if(e.target.event !== "0") {
+    if (e.target.event !== "0") {
       this.props.dispatch(getSubSubCategories(e.target.value));
       this.setState({
-        subSubCategoryDataBySubCategory:[]
-      })
-  }
-  else {
-    this.setState({
-        getSubSubCategoryBYSubCategory: []
-    });
-}
+        subSubCategoryDataBySubCategory: [],
+      });
+    } else {
+      this.setState({
+        getSubSubCategoryBYSubCategory: [],
+      });
+    }
   };
   /**call this function to click file input */
   handleClick = () => {
@@ -285,9 +258,6 @@ class ClaimsManagement extends Component {
   };
   // Managing page
   nextPage = (formProps) => {
-    const selectedDate = `${moment(
-      new Date(this.state.selectedDate).getTime()
-    )}`;
     if (formProps.arrivalStation === formProps.departureStation) {
       showError(this.props.t("Claim.PAGE_ALERT"));
     } else if (
@@ -395,9 +365,6 @@ class ClaimsManagement extends Component {
     }
   };
   render() {
-    console.log(this.state.subCategoryDataByCategory),
-    console.log(this.state.subSubCategoryDataBySubCategory)
-     
     const { handleSubmit } = this.props;
     return (
       <Fragment>
@@ -452,12 +419,7 @@ class ClaimsManagement extends Component {
                   <p className="text-center p-2">
                     {this.props.t("Claim.PROCESS_CLAIM")}
                   </p>
-                  <AvForm
-                    className=""
-                    noValidate
-                    // onSubmit={handleSubmit(this.onSubmit)}
-                    // model={this.props.initialValues}
-                  >
+                  <AvForm className="" noValidate>
                     <Row>
                       {/* Page 1 */}
                       {this.state.showPageOne && (
@@ -501,12 +463,11 @@ class ClaimsManagement extends Component {
                                 placeholder={""}
                                 className="form-control"
                                 onChange={(e) => this.getDepatureStationId(e)}
-                                // validate={[required]}
                               >
                                 <option value="">
                                   {this.props.t("Claim.PLEASE_SELECT_STN")}
                                 </option>
-                                {console.log(this.state.stationList)}
+
                                 {this.showStations(
                                   this.state.stationList
                                     ? getLangBasedStations(
@@ -527,7 +488,6 @@ class ClaimsManagement extends Component {
                                 component={renderSelectField}
                                 placeholder={""}
                                 className="form-control"
-                                // validate={[required]}
                               >
                                 <option value="">
                                   {this.props.t("Claim.PLEASE_SELECT_STN")}
@@ -556,12 +516,7 @@ class ClaimsManagement extends Component {
                                       "ErrorMsg.TRAIN_NUMBER_ERROR"
                                     ),
                                   },
-                                  // pattern: {
-                                  //   value: "^[0-9]+$",
-                                  //   errorMessage: this.props.t(
-                                  //     "Common.ONLY_NUM"
-                                  //   ),
-                                  // },
+
                                   maxLength: {
                                     value: 10,
                                   },
@@ -572,16 +527,9 @@ class ClaimsManagement extends Component {
                               <Label for="examplePassword">
                                 {this.props.t("Claim.TRAVEL_DATE_TIME")}
                               </Label>
-                              {/* <Field
-                            name="travelTime"
-                            //tag={Field}
-                            component={DatePickerComponent}
-                            label={"Travel date and time*"}
-                            type="text"
-                          /> */}
+
                               <DatePickerComponent
                                 getselectedData={this.getselectedData}
-                                // defaultValue={new Date("10/10/1990")}
                               />
                             </FormGroup>
                             <FormGroup>
@@ -597,7 +545,6 @@ class ClaimsManagement extends Component {
                                   </span>
                                 </label>
                                 <input
-                                  //component={CustomInput}
                                   type="file"
                                   name="updateTicket"
                                   id="updateTicket"
@@ -622,9 +569,7 @@ class ClaimsManagement extends Component {
                             <Button
                               color="btn btn-lg btn-primary px-5 btn-pill"
                               className="btn btn-lg btn-primary  p-3 home-btn-width btn-pill"
-                              // onClick={(e) => this.nextPage(e)}
                               type="submit"
-                              // disabled={pristine || submitting}
                               onClick={handleSubmit((values) =>
                                 this.onSubmit({
                                   values,
@@ -669,7 +614,6 @@ class ClaimsManagement extends Component {
                                       )
                                     : null
                                 )}
-                              
                               </Field>
                             </FormGroup>
                             <FormGroup>
@@ -771,7 +715,6 @@ class ClaimsManagement extends Component {
                                   </span>
                                 </label>
                                 <input
-                                  //component={CustomInput}
                                   type="file"
                                   name="updateClaim"
                                   id="updateClaim"
@@ -824,7 +767,6 @@ class ClaimsManagement extends Component {
             </Row>
           </Container>
         </ReactCSSTransitionGroup>
-        {/* <FooterComponent /> */}
       </Fragment>
     );
   }

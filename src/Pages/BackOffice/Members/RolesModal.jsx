@@ -1,15 +1,14 @@
-import React, { Fragment, Component } from "react";
-import { reduxForm, Field, change } from "redux-form";
+import React from "react";
+import { reduxForm, Field } from "redux-form";
 import { translate } from "react-multi-lang";
 import { connect } from "react-redux";
 import compose from "compose-function";
 import { withRouter } from "react-router-dom";
-import { AvForm, AvField } from "availity-reactstrap-validation";
+import { AvForm } from "availity-reactstrap-validation";
 
 import { showSuccess, showError, required } from "../../Helpers/utils";
-// import SubmitBtnLoader from "../../../Common/ButtonLoader";
+
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
@@ -19,10 +18,6 @@ import {
 } from "reactstrap";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 import RenderSelectMultiInput from "../../Common/renderMultipleInput";
-import {
-  getListProfile,
-  updateAssignProfileTouser,
-} from "../../../actions/profileAction";
 import { getAllRoles, assignRoleToUSer } from "../../../actions/roleAction";
 
 class RoleModal extends React.Component {
@@ -102,9 +97,6 @@ class RoleModal extends React.Component {
     const { handleSubmit } = this.props;
     return (
       <span className="d-inline-block mb-2 mr-2">
-        {/* <Button color="primary" onClick={this.toggle}>
-          Basic Modal
-        </Button> */}
         <Modal
           isOpen={this.props.modal}
           toggle={this.toggle}
@@ -121,16 +113,6 @@ class RoleModal extends React.Component {
               noValidate
               onSubmit={handleSubmit(this.onSubmit)}
             >
-              {/* <FormGroup>
-                <AvField
-                  name="label"
-                  tag={Field}
-                  component={renderTextField}
-                  label="User name"
-                  type="text"
-                  
-                />
-              </FormGroup> */}
               <FormGroup>
                 <Label>{this.props.t("Common.SELECT_ROLE") + "*"}</Label>
                 <Field
@@ -161,8 +143,6 @@ class RoleModal extends React.Component {
 }
 RoleModal = reduxForm({
   form: "Role",
-  //validate,
-  // asyncValidate,
 })(RoleModal);
 function mapStateToProps(state) {
   return {

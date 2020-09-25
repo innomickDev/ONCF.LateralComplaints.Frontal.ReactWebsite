@@ -4,10 +4,9 @@ import { connect } from "react-redux";
 import compose from "compose-function";
 import { withRouter } from "react-router-dom";
 import { translate } from "react-multi-lang";
-import { AvForm } from "availity-reactstrap-validation";
+
 import _ from "lodash";
-import RenderSelectMultiInput from "../../../Common/renderMultipleInput";
-import moment from "moment";
+
 import {
   Row,
   Col,
@@ -18,9 +17,7 @@ import {
   Breadcrumb,
   Label,
   Form,
-  Input,
   BreadcrumbItem,
-  Button,
   InputGroup,
   InputGroupAddon,
 } from "reactstrap";
@@ -33,7 +30,6 @@ import {
   getFileExtension,
   showError,
   showSuccess,
-  getLangBasedItem,
   getLangBasedDataLabel,
   dateTimeFormat,
   simpleDateFormat,
@@ -42,7 +38,6 @@ import {
   getTarifLabel,
   getLangBasedStationLabel,
   defaultDateFormat,
-  timeFormat,
 } from "../../../Helpers/utils";
 import {
   getClaimsDetailsById,
@@ -121,12 +116,6 @@ class ProcessClaimGrc extends Component {
       this.props.dispatch(getClaimsDetailsById(params.claimId));
     }
   };
-  // // hgetting categories
-  // componentDidMount = () => {
-  //   const params = qString.parse(this.props.location.search);
-  //   this.props.dispatch(getClaimsDetailsById(params.claimId));
-  //   // response data
-  // };
 
   componentWillReceiveProps = (nextProps) => {
     if (
@@ -170,7 +159,7 @@ class ProcessClaimGrc extends Component {
               nextProps.getTicketAttachmentData.attachment.slice(0, 5)
             ) + nextProps.getTicketAttachmentData.attachment
           : "",
-        // showTicketAttchment: true,
+
         mainLoader: false,
       });
       setTimeout(
@@ -193,13 +182,11 @@ class ProcessClaimGrc extends Component {
         nextProps.ClaimAttachmentData.attachment !== ""
       ) {
         this.setState({
-          ClaimAttachmentData:
-            // nextProps.ClaimAttachmentData.attachment !== "" &&
-            nextProps.ClaimAttachmentData.attachment
-              ? getFileExtension(
-                  nextProps.ClaimAttachmentData.attachment.slice(0, 5)
-                ) + nextProps.ClaimAttachmentData.attachment
-              : false,
+          ClaimAttachmentData: nextProps.ClaimAttachmentData.attachment
+            ? getFileExtension(
+                nextProps.ClaimAttachmentData.attachment.slice(0, 5)
+              ) + nextProps.ClaimAttachmentData.attachment
+            : false,
         });
         setTimeout(
           function() {
@@ -221,8 +208,6 @@ class ProcessClaimGrc extends Component {
     ) {
       this.setState({
         loadingReject: false,
-        // showResponse: false,
-        // hideBtn: false,
       });
 
       let responses = [];
@@ -320,10 +305,6 @@ class ProcessClaimGrc extends Component {
         localStorage.getItem("boGRCuserProfile")
       );
 
-      const userData =
-        boGRCuserDetails &&
-        boGRCuserDetails.data &&
-        boGRCuserDetails.data.roles[0];
       const requestData = {
         claimCode: parseInt(this.state.getCategoriesData.code),
         customizedEmail: this.state.customizedEmail,
@@ -471,11 +452,6 @@ class ProcessClaimGrc extends Component {
 
   //This is called onClick of temporary claim approval button when we login through agent
   temporaryClaimApproval = () => {
-    const cutomizedEmailData = {
-      claimCode: parseInt(this.state.getCategoriesData.code),
-    };
-
-    // this.props.dispatch(getCustomizedApprovedClaim(cutomizedEmailData));
     this.setState({
       loadingApprove: true,
       showActionTaken: true,
@@ -525,8 +501,7 @@ class ProcessClaimGrc extends Component {
 
   //This function is called onSubmit
   onSubmit = (formProps) => {
-    const claimStatusData =
-      this.state.getCategoriesData && this.state.getCategoriesData;
+    const claimStatusData = this.state.getCategoriesData;
     const tempApproveData = {
       claimCode: parseInt(claimStatusData.code),
       actionTaken: formProps.actionTaken,
@@ -535,10 +510,6 @@ class ProcessClaimGrc extends Component {
       localStorage.getItem("boGRCuserProfile")
     );
 
-    const userData =
-      boGRCuserDetails &&
-      boGRCuserDetails.data &&
-      boGRCuserDetails.data.roles[0];
     if (!canManage(permissions.canApproveGRCClaim)) {
       this.props.dispatch(temporaryApproveClaim(tempApproveData));
     }
@@ -573,7 +544,6 @@ class ProcessClaimGrc extends Component {
     this.props.history.goBack();
   };
   render() {
-    console.log(this.props.getClaimsDataById);
     const { startDate } = this.state;
 
     const categoriesData = this.state.getCategoriesData;
@@ -650,7 +620,7 @@ class ProcessClaimGrc extends Component {
                           <li className="list-group-item">
                             {this.props.t("Common.COMPLAINT_CHANNEL")} :{" "}
                             <b>
-                              {categoriesData && categoriesData
+                              {categoriesData
                                 ? getLangBasedDataLabel(
                                     categoriesData.claimSource
                                   )
@@ -691,7 +661,7 @@ class ProcessClaimGrc extends Component {
                             {" "}
                             {this.props.t("Common.CATEGORY")} :{" "}
                             <b>
-                              {categoriesData && categoriesData
+                              {categoriesData
                                 ? getLangBasedDataLabel(categoriesData.category)
                                 : "none"}
                             </b>
@@ -699,7 +669,7 @@ class ProcessClaimGrc extends Component {
                           <li className="list-group-item">
                             {this.props.t("Common.SUB_CATEGORY")} :{" "}
                             <b>
-                              {categoriesData && categoriesData
+                              {categoriesData
                                 ? getLangBasedDataLabel(
                                     categoriesData.subCategory
                                   )
@@ -712,9 +682,6 @@ class ProcessClaimGrc extends Component {
                               {categoriesData && categoriesData.eventDate
                                 ? simpleDateFormat(categoriesData.eventDate)
                                 : "none"}
-                              {/* {categoriesData && categoriesData
-                                ? dateTimeFormat(categoriesData.EventDate)
-                                : ""} */}
                             </b>
                           </li>
                           <li class="list-group-item">
@@ -788,22 +755,7 @@ class ProcessClaimGrc extends Component {
                                 : "none"}
                             </b>
                           </li>
-                          {/* <li className="list-group-item">
-                            {this.props.t("Common.ASSIGNED_DATE")} :{" "}
-                            <b>
-                              {categoriesData && categoriesData.assignedDate
-                                ? simpleDateFormat(categoriesData.assignedDate)
-                                : "none"}
-                            </b>
-                          </li> */}
-                          {/* <li className="list-group-item">
-                            {this.props.t("Common.CLOSING_DATE")} :{" "}
-                            <b>
-                              {categoriesData && categoriesData.respondDate
-                                ? simpleDateFormat(categoriesData.respondDate)
-                                : "none"}
-                            </b>
-                          </li> */}
+
                           <li className="list-group-item">
                             {this.props.t("Common.NEW_TRAVEL_DATE_TIME")} :{" "}
                             <b>
@@ -856,8 +808,7 @@ class ProcessClaimGrc extends Component {
                                 <b>
                                   {categoriesData
                                     ? categoriesData.departureHour
-                                    : // ? timeFormat(categoriesData.departureHour)
-                                      "none"}
+                                    : "none"}
                                 </b>
                               </li>
                             )}
@@ -868,8 +819,7 @@ class ProcessClaimGrc extends Component {
                                 <b>
                                   {categoriesData
                                     ? categoriesData.arrivalHour
-                                    : // ? timeFormat(categoriesData.arrivalHour)
-                                      "none"}
+                                    : "none"}
                                 </b>
                               </li>
                             )}
@@ -963,7 +913,6 @@ class ProcessClaimGrc extends Component {
                               </li>
                             )}
 
-                          {/* {this.state.showTicketAttchment && ( */}
                           <li className="list-group-item">
                             <a
                               href="javscript:void(0)"
@@ -992,8 +941,6 @@ class ProcessClaimGrc extends Component {
                             ></a>
                           </li>
 
-                          {/* )} */}
-                          {/* {this.state.ClaimAttachmentData && ( */}
                           <li className="list-group-item">
                             <a
                               href="javscript:void(0)"
@@ -1022,8 +969,6 @@ class ProcessClaimGrc extends Component {
                               download={"Claim_Attachment"}
                             ></a>
                           </li>
-
-                          {/* )} */}
                         </ul>
                       </Col>
                     </Row>
@@ -1031,11 +976,7 @@ class ProcessClaimGrc extends Component {
 
                     {canManage(permissions.canChangeClaimStatus) && (
                       <div>
-                        <Form
-                          noValidate
-                          // modal={this.props.initialValues}
-                          onSubmit={handleSubmit(this.onSubmit)}
-                        >
+                        <Form noValidate onSubmit={handleSubmit(this.onSubmit)}>
                           <Row>
                             {categoriesData &&
                               categoriesData.claimStatus === "1" && (
@@ -1087,7 +1028,6 @@ class ProcessClaimGrc extends Component {
                             {categoriesData &&
                               categoriesData.claimStatus === "5" &&
                               canManage(permissions.canApproveGRCClaim) &&
-                              // canManage(permissions.canCreateGRCClaim) &&
                               this.state.hideApprove && (
                                 <Col className="col-md-auto">
                                   <SubmitBtnLoader
@@ -1104,9 +1044,6 @@ class ProcessClaimGrc extends Component {
                             {/*Here we call show Buttons function to show or hide buttons */}
                             {this.showButtons(categoriesData)}
                           </Row>
-                          {console.log(
-                            categoriesData ? categoriesData.actionTaken : ""
-                          )}
 
                           {this.state.showActionTaken && (
                             <FormGroup>
@@ -1122,7 +1059,6 @@ class ProcessClaimGrc extends Component {
 
                           {this.state.showResponse &&
                             canManage(permissions.canApproveGRCClaim) && (
-                              // canManage(permissions.canCreateGRCClaim) && (
                               <ReactCSSTransitionGroup
                                 component="div"
                                 transitionName="TabsAnimation"
@@ -1167,7 +1103,6 @@ class ProcessClaimGrc extends Component {
                               </ReactCSSTransitionGroup>
                             )}
                           {this.state.showActionTaken &&
-                            // canManage(permissions.canCreateGRCClaim) &&
                             !canManage(permissions.canApproveGRCClaim) && (
                               <Row>
                                 <Col md={4}>
@@ -1207,7 +1142,6 @@ class ProcessClaimGrc extends Component {
             </Row>
           </Container>
         </ReactCSSTransitionGroup>
-        {/* <FooterComponent /> */}
       </Fragment>
     );
   }
@@ -1215,12 +1149,10 @@ class ProcessClaimGrc extends Component {
 
 ProcessClaimGrc = reduxForm({
   form: "ProcessClaimGrc",
-  // enableReinitialize: true,
 })(ProcessClaimGrc);
 
 function mapStateToProps(state) {
   return {
-    // initialValues: state.Claim.getClaimsDataById,
     getClaimsDataById: state.Claim.getClaimsDataById,
 
     customResponseData: state.Response.customResponseData

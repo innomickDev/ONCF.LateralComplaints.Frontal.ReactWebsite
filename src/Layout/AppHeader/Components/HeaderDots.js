@@ -129,11 +129,10 @@ class HeaderDots extends Component {
   };
   //this function is used to call the getNotifications data
   getNotification = () => {
-    if (this.state.notificationData) {
+    if (this.state.notificationData &&this.state.notificationData.length) {
       return (
-        this.state.notificationData &&
         this.state.notificationData.map((notificationData, key) => {
-          if (notificationData && notificationData.isSeen) {
+          if (notificationData.isSeen) {
             return (
               <VerticalTimelineElement className="vertical-timeline-item">
                 <h4 className="timeline-title">

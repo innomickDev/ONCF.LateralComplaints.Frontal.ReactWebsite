@@ -1,6 +1,6 @@
 import { STATISTICS_CONST } from "./actionTypes";
-import { AXIOS_INSTANCE, STATISTICS_API, CONFIG } from "./apiEndPoints";
-import { checkHttpStatus, parseJSON, handleLogoutRedirect } from "../utils";
+import { AXIOS_INSTANCE, STATISTICS_API } from "./apiEndPoints";
+import { checkHttpStatus, parseJSON } from "../utils";
 import * as base from "./baseAction";
 
 // Users statistics

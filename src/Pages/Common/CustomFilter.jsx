@@ -10,32 +10,25 @@ import {
   Col,
   Card,
   CardHeader,
-  Select,
   CardBody,
   Form,
   FormGroup,
   Label,
-  Input,
-  CustomInput,
   InputGroup,
-  InputGroupAddon
+  InputGroupAddon,
 } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import compose from "compose-function";
 import { translate } from "react-multi-lang";
-import { getByCriteria } from "../../actions/certificationDemandsAction";
+
 import { reduxForm, Field } from "redux-form";
-import {
-  renderTextField,
-  renderCustomField,
-  renderSelectField
-} from "./RenderTextField";
+import { renderTextField, renderSelectField } from "./RenderTextField";
 import { getAllBoardingPoints } from "../../actions/boardingPointsAction";
 import { getAllLandingPoints } from "../../actions/landingPointsAction";
 import { getAllExportersByCriteria } from "../../actions/exportersAction";
 import { getAllDestinations } from "../../actions/destinationsAction";
-import { getAllMarketPlaces } from "../../actions/marketPlacesAction";
+
 import { getAllInfastructure } from "../../actions/infrastructureAction";
 import { requestDateFormat, getOrderedItems } from "../Helpers/utils";
 
@@ -49,11 +42,11 @@ class FilterComponent extends Component {
       boardingPoints: [],
       destinations: [],
       marketPlace: [],
-      landingPoints: []
+      landingPoints: [],
     };
   }
 
-  componentWillReceiveProps = nextProps => {
+  componentWillReceiveProps = (nextProps) => {
     if (nextProps.exporterData) {
       this.setState({ exporterData: nextProps.exporterData });
     }
@@ -81,34 +74,32 @@ class FilterComponent extends Component {
     this.props.dispatch(getAllLandingPoints());
     this.props.dispatch(getAllBoardingPoints());
     this.props.dispatch(getAllDestinations());
-    //this.props.dispatch(getAllMarketPlaces());
     this.props.dispatch(getAllInfastructure());
   }
   resetForm = () => {
-    //this.props.reset();
     this.props.initialize({ infrastructureId: this.props.defaultSiteValue });
     this.props.onFilterSubmit({
       infrastructureId: this.props.defaultSiteValue,
-      statusCode: "inProgress"
+      statusCode: "inProgress",
     });
   };
   renderOptions = (optionsList, type) => {
     if (type === "destination") {
-      return getOrderedItems(optionsList, "Label").map(option => {
+      return getOrderedItems(optionsList, "Label").map((option) => {
         return <option value={option.Label}> {option.Label}</option>;
       });
     } else {
-      return getOrderedItems(optionsList, "Label").map(option => {
+      return getOrderedItems(optionsList, "Label").map((option) => {
         return <option value={option.Id}> {option.Label}</option>;
       });
     }
   };
-  getExporterOptions = optionsList => {
-    return getOrderedItems(optionsList, "SocialReason").map(option => {
+  getExporterOptions = (optionsList) => {
+    return getOrderedItems(optionsList, "SocialReason").map((option) => {
       return <option value={option.Id}> {option.SocialReason}</option>;
     });
   };
-  onSubmit = formProps => {
+  onSubmit = (formProps) => {
     if (formProps.infrastructureId === "0") {
       delete formProps.infrastructureId;
     }
@@ -145,11 +136,11 @@ class FilterComponent extends Component {
   };
 
   // handleDateChange
-  handleStartDateChange = date => {
+  handleStartDateChange = (date) => {
     this.setState({ startDate: date });
   };
 
-  handleEndDateChange = date => {
+  handleEndDateChange = (date) => {
     this.setState({ endDate: date });
   };
   render() {
@@ -271,15 +262,7 @@ class FilterComponent extends Component {
                   </Field>
                 </Col>
               </FormGroup>
-              {/*<FormGroup row className="CIList-formgroup">
-                                    <Col>
-                                     <Label className="filter-labels" for="exampleEmail">{this.props.t("CIList.MARKET_PLACE")}</Label>
-                                      <Field className="form-control mb-2" name="marketPlaceId" component={renderSelectField} defaultValue={"InProgress"}>
-                                            <option>{this.props.t("CIList.SELECT")}</option> 
-                                            {this.renderOptions(this.state.marketPlace) }
-                                       </Field>
-                                    </Col>
-                                </FormGroup>*/}
+
               <FormGroup row className="CIList-formgroup">
                 <Col>
                   <Label className="filter-labels" for="exampleEmail">
@@ -344,7 +327,7 @@ class FilterComponent extends Component {
                 {this.props.t("CIList.FILTER")}
               </Button>
               <Button
-                onClick={e => this.resetForm()}
+                onClick={(e) => this.resetForm()}
                 className="mt-2 ml-2 d-inline-block"
                 color="secondary"
               >
@@ -358,20 +341,18 @@ class FilterComponent extends Component {
   }
 }
 FilterComponent = reduxForm({
-  form: "FilterComponent"
-  //validate,
-  // asyncValidate,
+  form: "FilterComponent",
 })(FilterComponent);
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     intialValues: { infrastructureId: "1" },
     exporterData: state.Exporters.exporterData,
     boardingPoints: state.BoardingPoints.masterData,
     destinations: state.Destinations.masterData,
-    // marketPlace:state.MarketPlaces.masterData,
+
     landingPoints: state.LandingPoints.masterData,
-    infrastructureData: state.Infrastructure.infrastructureData
+    infrastructureData: state.Infrastructure.infrastructureData,
   };
 };
 export default compose(

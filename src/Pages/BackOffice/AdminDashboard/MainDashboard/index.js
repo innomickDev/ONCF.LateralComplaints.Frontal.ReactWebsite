@@ -2,24 +2,7 @@ import React, { Fragment, Component } from "react";
 import {
   Row,
   Col,
-  Alert,
-  Button,
-  CardHeader,
-  Table,
-  ButtonGroup,
-  Nav,
-  NavItem,
-  NavLink,
-  Popover,
-  PopoverBody,
-  Progress,
   Card,
-  CardBody,
-  DropdownItem,
-  DropdownToggle,
-  DropdownMenu,
-  UncontrolledButtonDropdown,
-  CardFooter
 } from "reactstrap";
 import { translate } from "react-multi-lang";
 import Circle from "react-circle";
@@ -29,9 +12,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleUp,
   faAngleDown,
-  faQuestionCircle,
-  faBusinessTime,
-  faCog
 } from "@fortawesome/free-solid-svg-icons";
 import { Breadcrumb, BreadcrumbItem } from "reactstrap";
 import { faHome } from "@fortawesome/free-solid-svg-icons";

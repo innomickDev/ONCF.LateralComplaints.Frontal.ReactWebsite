@@ -1,13 +1,5 @@
 import React, { Fragment, Component } from "react";
-import {
-  Container,
-  Row,
-  Card,
-  CardBody,
-  Col,
-  Button,
-  FormGroup,
-} from "reactstrap";
+import { Container, Row, Card, CardBody, Col, FormGroup } from "reactstrap";
 import { reduxForm, Field } from "redux-form";
 import { translate } from "react-multi-lang";
 import { connect } from "react-redux";
@@ -45,7 +37,6 @@ class BackOfficeLogin extends Component {
 
       if (localStorage.getItem("boGRCuserDetails")) {
         this.props.history.push("/dashboards/claim-lists");
-        // this.props.history.push("/backoffice/login");
       }
     }
   };
@@ -66,12 +57,10 @@ class BackOfficeLogin extends Component {
       }
     }
 
-    console.log(nextProps.profileData);
     if (
       nextProps.profileData &&
       nextProps.profileData !== this.props.profileData
     ) {
-      console.log(nextProps.profileData);
       if (
         !canManage(permissions.canViewCustomerGRCClaims) &&
         !canManage(permissions.canViewCustomer2255Claims)
@@ -82,16 +71,9 @@ class BackOfficeLogin extends Component {
       } else {
         setTimeout(() => {
           this.props.history.push("/dashboards/claim-lists");
-          // window.location.reload();
         }, 2000);
       }
     }
-
-    // this.props.dispatch(myProfile());
-    // setTimeout(() => {
-    //   this.props.history.push("/dashboards/claim-lists");
-    //   // window.location.reload();
-    // }, 2000);
 
     // TODO remove settime out from backoffice loading
 
@@ -281,7 +263,6 @@ BackOfficeLogin = reduxForm({
   // asyncValidate,
 })(BackOfficeLogin);
 function mapStateToProps(state) {
-  console.log(state.Account.profileData);
   return {
     success: true,
     isAuthenticated: state.Login.isAuthenticated,

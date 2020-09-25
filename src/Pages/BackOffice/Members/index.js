@@ -1,14 +1,5 @@
 import React, { Fragment, Component } from "react";
-import {
-  Row,
-  Col,
-  Card,
-  CardBody,
-  InputGroup,
-  InputGroupAddon,
-  Input,
-  Button,
-} from "reactstrap";
+import { Row, Col, Card, CardBody, Button } from "reactstrap";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import { translate } from "react-multi-lang";
 import ReactTable from "react-table";
@@ -18,7 +9,6 @@ import { connect } from "react-redux";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  dateFormat,
   dateTimeFormat,
   INDEX_PAGE_SIZE_DEFAULT,
   INDEX_PAGE_SIZE_OPTIONS,
@@ -357,7 +347,7 @@ class MembersComponent extends Component {
     const header = {
       name: this.props.t("Common.NAME"),
       role: this.props.t("Common.ROLE"),
-      // role: this.props.t("Common.PROFILE"),
+
       registrationNumber: this.props.t("Common.REGISTRATION_NUM"),
       created: this.props.t("Common.DATE_CREATED"),
       actions: this.props.t("Common.ACTIONS"),
@@ -398,10 +388,7 @@ class MembersComponent extends Component {
                   </div>
                   <div>
                     {this.props.t("Common.USERS_LIST")}
-                    <div className="page-title-subheading">
-                      {/* {this.props.t("Common.MEMBER_LIST_SUB")} */}
-                      {/* {this.props.t("Common.USER_LIST_SUB")} */}
-                    </div>
+                    <div className="page-title-subheading"></div>
                   </div>
                 </div>
                 <div className="page-title-actions">
@@ -412,9 +399,8 @@ class MembersComponent extends Component {
                       </a>
                     </BreadcrumbItem>
                     <BreadcrumbItem>
-                      {/* <a href="javascript:void(0);"> */}{" "}
+                      {" "}
                       {this.props.t("Common.USERS_LIST")}
-                      {/* </a> */}
                     </BreadcrumbItem>
                   </Breadcrumb>
                 </div>
@@ -615,23 +601,6 @@ class MembersComponent extends Component {
                                               }
                                             />
                                           )}
-                                          {/* {row.original.role !== "Admin" && (
-                                            <Button
-                                              className="btn btn-success"
-                                              disabled={this.state.isRequesting}
-                                              title={this.props.t(
-                                                "Common.UNBLOCK"
-                                              )}
-                                              onClick={(e) =>
-                                                this.unblockAccount(
-                                                  row.index,
-                                                  row.original.actions.key
-                                                )
-                                              }
-                                            >
-                                              <i className="fas fa-unlock"></i>{" "}
-                                            </Button>
-                                          )} */}
                                         </div>
                                       )}
                                   </div>
@@ -651,7 +620,6 @@ class MembersComponent extends Component {
             </Col>
           </Row>
         </ReactCSSTransitionGroup>
-        {/* <FooterComponent /> */}
       </Fragment>
     );
   }

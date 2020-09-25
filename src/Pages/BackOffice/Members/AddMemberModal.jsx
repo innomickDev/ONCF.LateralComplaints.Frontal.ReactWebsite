@@ -1,5 +1,5 @@
-import React, { Fragment, Component } from "react";
-import { reduxForm, Field, change } from "redux-form";
+import React, { Fragment } from "react";
+import { reduxForm, Field } from "redux-form";
 import { translate } from "react-multi-lang";
 import { connect } from "react-redux";
 import compose from "compose-function";
@@ -17,7 +17,6 @@ import {
 } from "../../Helpers/utils";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
@@ -171,17 +170,10 @@ class AddMemberModal extends React.Component {
                             "ErrorMsg.FIRST_NAME_ERROR"
                           ),
                         },
-                        // pattern: {
-                        //   value: "^[a-zA-Z]+$",
-                        //   errorMessage: this.props.t("Common.ONLY_TEXT")
-                        // },
+
                         maxLength: {
                           value: 100,
                         },
-                        // minLength: {
-                        //   value: 3,
-                        //   errorMessage: this.props.t("Common.MIN_LENGTH")
-                        // }
                       }}
                     />
                   </FormGroup>
@@ -200,17 +192,10 @@ class AddMemberModal extends React.Component {
                             "ErrorMsg.LAST_NAME_ERROR"
                           ),
                         },
-                        // pattern: {
-                        //   value: "^[a-zA-Z]+$",
-                        //   errorMessage: this.props.t("Common.ONLY_TEXT")
-                        // },
+
                         maxLength: {
                           value: 100,
                         },
-                        // minLength: {
-                        //   value: 3,
-                        //   errorMessage: this.props.t("Common.MIN_LENGTH")
-                        // }
                       }}
                     />
                   </FormGroup>
@@ -237,10 +222,8 @@ class AddMemberModal extends React.Component {
                           value: 10,
                         },
                         minLength: {
-                          // required: {
                           value: 10,
                           errorMessage: this.props.t("ErrorMsg.ACCEPT_NUM"),
-                          // },
                         },
                       }}
                       required
@@ -269,7 +252,6 @@ class AddMemberModal extends React.Component {
                   <FormGroup>
                     <AvField
                       name="registrationNumber"
-                      // readOnly={this.props.initialValues ? true : false}
                       tag={Field}
                       component={renderTextField}
                       label={this.props.t("Common.REGISTRATION_NUMBER")}
@@ -285,10 +267,6 @@ class AddMemberModal extends React.Component {
                           value: 3,
                           errorMessage: this.props.t("Common.MIN_LENGTH"),
                         },
-                        // pattern: {
-                        //   value: EMAIL_REGEX,
-                        //   errorMessage: this.props.t("Common.WRONG_EMAIL"),
-                        // },
                       }}
                     />
                   </FormGroup>
@@ -335,8 +313,6 @@ class AddMemberModal extends React.Component {
 
 AddMemberModal = reduxForm({
   form: "AddMemberModal",
-  //validate,
-  // asyncValidate,
 })(AddMemberModal);
 function mapStateToProps(state) {
   return {

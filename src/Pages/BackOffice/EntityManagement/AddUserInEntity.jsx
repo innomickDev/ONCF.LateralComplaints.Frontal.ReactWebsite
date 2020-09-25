@@ -1,18 +1,13 @@
-import React, { Fragment, Component } from "react";
-import { reduxForm, Field, change } from "redux-form";
+import React, { Fragment } from "react";
+import { reduxForm, Field } from "redux-form";
 import { translate } from "react-multi-lang";
 import { connect } from "react-redux";
 import compose from "compose-function";
 import { withRouter } from "react-router-dom";
-import { AvForm, AvField } from "availity-reactstrap-validation";
-import {
-  renderTextField,
-  renderSelectField,
-} from "../../Common/RenderTextField";
+import { AvForm } from "availity-reactstrap-validation";
 import { showSuccess, showError, required } from "../../Helpers/utils";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
@@ -95,11 +90,7 @@ class AddUserInEntity extends React.Component {
 
     return (
       <Fragment>
-        <Modal
-          isOpen={this.props.modal}
-          toggle={this.toggle}
-          // className="modalSize"
-        >
+        <Modal isOpen={this.props.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>
             <h4 className="font-weight-bold">
               {this.props.t("Common.ADD_USER_IN_ENTITIY")}
@@ -149,8 +140,6 @@ class AddUserInEntity extends React.Component {
 
 AddUserInEntity = reduxForm({
   form: "AddUserInEntity",
-  //validate,
-  // asyncValidate,
 })(AddUserInEntity);
 function mapStateToProps(state) {
   return {

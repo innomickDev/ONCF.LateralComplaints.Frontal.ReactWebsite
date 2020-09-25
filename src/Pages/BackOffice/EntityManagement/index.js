@@ -8,10 +8,8 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  dateFormat,
   INDEX_PAGE_SIZE_DEFAULT,
   INDEX_PAGE_SIZE_OPTIONS,
   showSuccess,
@@ -30,7 +28,7 @@ import AddUserInEntity from "./AddUserInEntity";
 import AddResponsibilityInEntity from "./AddResponsibilityInEntity";
 import DeleteUserInEntity from "./DeleteUserInEntity";
 import DeleteResponsibilityInEntity from "./DeleteResponsibilityInEntity";
-import { getLangBasedValues, LANG_CODES } from "../../Helpers/utils";
+
 import MainLoader from "../../Common/Loader";
 class GroupComponent extends Component {
   constructor(props) {
@@ -125,7 +123,6 @@ class GroupComponent extends Component {
         nextProps.isUpdateEntitySuccess &&
         nextProps.isUpdateEntitySuccess !== this.props.isUpdateEntitySuccess //-->for entities
       ) {
-        // let queryString = `?page=${1}&pageSize=${10}`;
         this.props.dispatch(getListEntity({ page: 1, pageSize: 10 }));
         this.setState({ loading: false });
       }
@@ -318,9 +315,7 @@ class GroupComponent extends Component {
                   </div>
                   <div>
                     {this.props.t("Common.ENTITIY_MGMT")}
-                    <div className="page-title-subheading">
-                      {/* {this.props.t("Common.MEMBER_LIST_SUB")} */}
-                    </div>
+                    <div className="page-title-subheading"></div>
                   </div>
                 </div>
                 <div className="page-title-actions">
@@ -331,9 +326,8 @@ class GroupComponent extends Component {
                       </a>
                     </BreadcrumbItem>
                     <BreadcrumbItem>
-                      {/* <a href="javascript:void(0);"> */}{" "}
+                      {" "}
                       {this.props.t("Common.ENTITIY_MGMT")}
-                      {/* </a> */}
                     </BreadcrumbItem>
                   </Breadcrumb>
                 </div>
@@ -352,14 +346,7 @@ class GroupComponent extends Component {
                   </Button>
                 </Col>
                 <Col md={3} className="ml-auto">
-                  <InputGroup>
-                    {/* <InputGroupAddon addonType="prepend">
-                    <div className="input-group-text">
-                      <FontAwesomeIcon icon={faSearch} />
-                    </div>
-                  </InputGroupAddon>
-                  <Input placeholder="Search..." /> */}
-                  </InputGroup>
+                  <InputGroup></InputGroup>
                 </Col>
               </Row>
             </Card>
@@ -434,7 +421,6 @@ class GroupComponent extends Component {
                                           <i className="fa fa-plus"></i>{" "}
                                           <i className="fa fa-users"></i>
                                         </Button>{" "}
-                                        {/* {canManage(permissions.deletable) && ( */}
                                         <Button
                                           className="btn btn-success"
                                           title={this.props.t(
@@ -460,7 +446,6 @@ class GroupComponent extends Component {
                                           <i className="fa fa-plus"></i>{" "}
                                           <i className="fas fa-users-cog"></i>
                                         </Button>{" "}
-                                        {/* {canManage(permissions.deletable) && ( */}
                                         <Button
                                           className="btn btn-warning"
                                           title={this.props.t(
@@ -475,7 +460,6 @@ class GroupComponent extends Component {
                                           <i className="fa fa-minus"></i>{" "}
                                           <i className="fas fa-users-cog"></i>
                                         </Button>
-                                        {/* )} */}
                                       </div>
                                     )}
                                   </div>
@@ -486,8 +470,6 @@ class GroupComponent extends Component {
                         ],
                       },
                     ]}
-                    // manual
-                    // pages={this.state.meta.total}
                     defaultPageSize={10}
                     className="-highlight"
                     {...this.translations}
@@ -497,7 +479,6 @@ class GroupComponent extends Component {
             </Col>
           </Row>
         </ReactCSSTransitionGroup>
-        {/* <FooterComponent /> */}
       </Fragment>
     );
   }
@@ -525,7 +506,7 @@ function mapStateToProps(state) {
     isDeleteUserEntitySuccess: state.Entity.isDeleteUserEntitySuccess,
   };
 }
-//export default translate(MembersComponent);
+
 export default compose(
   translate,
   withRouter,

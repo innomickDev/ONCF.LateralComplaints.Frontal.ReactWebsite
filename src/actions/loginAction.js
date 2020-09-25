@@ -1,9 +1,8 @@
 import { AUTH_CONST } from "./actionTypes";
-import { DEV_ENV_URL } from "../Pages/Helpers/utils";
+
 import {
   AXIOS_INSTANCE,
   LOGIN_API,
-  CONFIG,
   LOGIN_CONFIG,
 } from "./apiEndPoints";
 import { checkHttpStatus, parseJSON, handleLoginRedirect } from "../utils";
@@ -50,8 +49,6 @@ export function BackOffice(formData) {
           })
         );
       });
-    // .catch((error) => {
-    //   dispatch(base.handleCatch(AUTH_CONST.LOGIN_FAILURE, error));
-    // });
+   
   };
 }

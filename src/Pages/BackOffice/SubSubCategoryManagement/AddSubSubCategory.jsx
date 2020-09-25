@@ -1,19 +1,15 @@
-import React, { Fragment, Component } from "react";
-import { reduxForm, Field, change } from "redux-form";
+import React, { Fragment } from "react";
+import { reduxForm, Field } from "redux-form";
 import { translate } from "react-multi-lang";
 import { connect } from "react-redux";
 import compose from "compose-function";
 import { withRouter } from "react-router-dom";
 import { AvForm, AvField } from "availity-reactstrap-validation";
-import {
-  renderTextField,
-  renderSelectField,
-} from "../../Common/RenderTextField";
+import { renderTextField } from "../../Common/RenderTextField";
 import {
   showSuccess,
   showError,
   required,
-  getLangBasedItem,
   getLangBasedDataLabel,
   ENG_REGEX,
   FRENCH_REGEX,
@@ -21,7 +17,6 @@ import {
 } from "../../Helpers/utils";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
@@ -36,7 +31,7 @@ import {
   addSubSubCategory,
   updateSubSubCategory,
 } from "../../../actions/subSubCategoryAction";
-import { getCategories } from "../../../actions/categoryAction";
+
 import { getAllSubCategories } from "../../../actions/subCategoryAction";
 
 class AddSubSubCategories extends React.Component {
@@ -46,8 +41,6 @@ class AddSubSubCategories extends React.Component {
       modal: false,
       selectField: false,
     };
-
-    //this.toggle = this.toggle.bind(this);
   }
 
   componentDidMount() {
@@ -180,9 +173,6 @@ class AddSubSubCategories extends React.Component {
                       options={this.state.subCategoryList}
                       required
                     />
-                    {/* {this.state.selectField && (
-                      <p className="text-danger">Alert msg</p>
-                    )} */}
                   </FormGroup>
                   <FormGroup>
                     <AvField
@@ -277,7 +267,6 @@ class AddSubSubCategories extends React.Component {
                       ? `${this.props.t("Common.UPDATE_SUB_SUB_CATEGORY")}`
                       : `${this.props.t("Common.ADD_SUB_SUB_CATEGORY")}`
                   }
-                  // label="Add SubCategories"
                   className="btn btn-success"
                   loading={this.state.loading}
                   submitting={""}
@@ -295,8 +284,6 @@ class AddSubSubCategories extends React.Component {
 
 AddSubSubCategories = reduxForm({
   form: "AddSubCategories",
-  //validate,
-  // asyncValidate,
 })(AddSubSubCategories);
 function mapStateToProps(state) {
   return {

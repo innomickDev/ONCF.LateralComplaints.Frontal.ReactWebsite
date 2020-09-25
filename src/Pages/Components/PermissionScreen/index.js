@@ -1,10 +1,10 @@
 import React from "react";
 import compose from "compose-function";
-import { Row, Col, Card, Container, CardHeader, CardBody } from "reactstrap";
+import { Row, Col, Card, Container, CardBody } from "reactstrap";
 import { translate } from "react-multi-lang";
-import bgImage from "assets/img/plain-white.jpg";
+
 import Logo from "assets/img/svg/LOGO.svg";
-import { Field, reduxForm } from "redux-form";
+import { reduxForm } from "redux-form";
 class permissionScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -39,9 +39,6 @@ class permissionScreen extends React.Component {
                 <h5 className="text-center py-3  font-weight-bold rounded">
                   Welcome to ONCF-2255
                 </h5>
-                {/* <p className="text-center fy">
-                  Hello {userName.userName} Welcome to backOffice
-                </p> */}
               </CardBody>
               <div className="text-center text-white p-ab">
                 <p className="c-bg p-3 "></p>
@@ -50,37 +47,6 @@ class permissionScreen extends React.Component {
           </Col>
         </Row>
       </Container>
-      // <Container fluid className="claim-block c-h">
-      //   <Row className="">
-      //     <Col md={12}>
-      //       <Card className="main-card ">
-      //         <CardHeader className="c-header">
-      //           <Row className="text-center w-100 text-light">
-      //             <Col md={12} className="mx-auto">
-      //               <h5 className=" text-canter py-3  font-weight-bold rounded">
-      //                 Hello {userName.userName} Welcome to backOffice
-      //               </h5>
-      //             </Col>
-      //           </Row>
-      //         </CardHeader>
-      //       </Card>
-      //     </Col>
-      //   </Row>
-      // </Container>
-      // <div>
-      //   <div className="full-page-content">
-
-      //     <div className="welcome-center">
-
-      //       <h1>Hello {userName.userName} Welcome to backOffice </h1>
-
-      //     </div>
-      //   </div>
-      //   <div
-      //     className="full-page-background"
-      //     style={{ backgroundImage: "url(" + bgImage + ")" }}
-      //   />
-      // </div>
     );
   }
 }

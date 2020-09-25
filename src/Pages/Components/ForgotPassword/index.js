@@ -10,15 +10,8 @@ import { renderTextField } from "../../Common/RenderTextField";
 import Logo from "../../../assets/img/svg/LOGO.svg";
 import { forgotPassword } from "../../../actions/accountAction";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
-// import FooterComponent from "../HomeComponent/Footer";
-import {
-  showSuccess,
-  showError,
-  required,
-  EMAIL_REGEX,
-} from "../../Helpers/utils";
+import { showError, required, EMAIL_REGEX } from "../../Helpers/utils";
 import ReactCSSTransitionGroup from "react-addons-css-transition-group";
-import queryString from "query-string";
 const emailRex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 class ForgotPassword extends Component {
@@ -28,16 +21,11 @@ class ForgotPassword extends Component {
       loading: false,
     };
   }
-  // componentDidMount = () => {
-  //   this.isBackOffice = queryString.parse(
-  //     this.props.location.search
-  //   ).isBackOffice;
-  // };
   componentWillReceiveProps = (nextProps, props) => {
     if (
       nextProps.forgotPasswordNetworkErrorStatus &&
       nextProps.forgotPasswordNetworkErrorStatus !==
-      this.props.forgotPasswordNetworkErrorStatus
+        this.props.forgotPasswordNetworkErrorStatus
     ) {
       showError(this.props.t("Common.SOMETHING_WENT_WRONG"));
       this.setState({
@@ -47,7 +35,7 @@ class ForgotPassword extends Component {
     if (
       nextProps.forgotPasswordErrorStatus &&
       nextProps.forgotPasswordErrorStatus !==
-      this.props.forgotPasswordErrorStatus
+        this.props.forgotPasswordErrorStatus
     ) {
       showError(nextProps.forgotPasswordErrorStatus);
       this.setState({
@@ -55,11 +43,11 @@ class ForgotPassword extends Component {
       });
     }
     if (
-      (nextProps.emailSuccess && nextProps.emailSuccess) !==
+      (nextProps.emailSuccess) !==
       this.props.emailSuccess
     ) {
       setTimeout(
-        function () {
+        function() {
           this.props.history.push("/backoffice/change-password");
         }.bind(this),
         1000
@@ -75,7 +63,6 @@ class ForgotPassword extends Component {
       email: formProps.Email,
       isBackOfficeUser: true,
     };
-    // console.log(reqData);
 
     if (this.state.emailValidation) {
       this.props.dispatch(forgotPassword(reqData));
@@ -164,12 +151,7 @@ class ForgotPassword extends Component {
                       </FormGroup>
 
                       <div className="text-center pt-3">
-                        {/* <Button
-                        className="btn btn-lg btn-primary px-5 btn-pill"
-                        type="submit"
-                      >
-                        Send
-                      </Button> */}
+
                         <SubmitBtnLoader
                           label={this.props.t("ForgotPassword.SUBMIT")}
                           className="btn btn-lg btn-primary px-5 btn-pill"
@@ -196,18 +178,14 @@ class ForgotPassword extends Component {
             </Row>
           </Container>
         </ReactCSSTransitionGroup>
-        {/* <FooterComponent /> */}
       </Fragment>
     );
   }
 }
 ForgotPassword = reduxForm({
   form: "ForgotPassword",
-  //validate,
-  // asyncValidate,
 })(ForgotPassword);
 function mapStateToProps(state) {
-  //console.log(state.Account.errorStatus);
   return {
     forgotPasswordNetworkErrorStatus:
       state.Account.forgotPasswordNetworkErrorStatus,

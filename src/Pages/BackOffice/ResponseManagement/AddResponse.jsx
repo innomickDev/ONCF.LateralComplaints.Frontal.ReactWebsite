@@ -1,5 +1,5 @@
-import React, { Fragment, Component } from "react";
-import { reduxForm, Field, change } from "redux-form";
+import React, { Fragment } from "react";
+import { reduxForm, Field } from "redux-form";
 import { translate } from "react-multi-lang";
 import { connect } from "react-redux";
 import compose from "compose-function";
@@ -9,7 +9,6 @@ import { renderTextField } from "../../Common/RenderTextField";
 import { showSuccess, showError, required } from "../../Helpers/utils";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
@@ -17,7 +16,6 @@ import {
   FormGroup,
   Row,
   Col,
-  Label,
 } from "reactstrap";
 
 import { addResponse, updateResponse } from "../../../actions/responseAction";
@@ -28,8 +26,6 @@ class AddResponse extends React.Component {
     this.state = {
       modal: false,
     };
-
-    //this.toggle = this.toggle.bind(this);
   }
   componentWillReceiveProps(nextProps, props) {
     if (nextProps !== props) {
@@ -157,7 +153,6 @@ class AddResponse extends React.Component {
                       ? `${this.props.t("Common.UPDATE_RESPONSE")}`
                       : `${this.props.t("Common.ADD_RESPONSE")}`
                   }
-                  // label="Add station"
                   className="btn btn-success"
                   loading={this.state.loading}
                   submitting={""}
@@ -175,8 +170,6 @@ class AddResponse extends React.Component {
 
 AddResponse = reduxForm({
   form: "AddResponse",
-  //validate,
-  // asyncValidate,
 })(AddResponse);
 function mapStateToProps(state) {
   return {

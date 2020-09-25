@@ -1,14 +1,13 @@
-import React, { Fragment, Component } from "react";
-import { reduxForm, Field, change } from "redux-form";
+import React, { Fragment } from "react";
+import { reduxForm, Field } from "redux-form";
 import { translate } from "react-multi-lang";
 import { connect } from "react-redux";
 import compose from "compose-function";
 import { withRouter } from "react-router-dom";
-import { AvForm, AvField } from "availity-reactstrap-validation";
-import { showSuccess, showError, required } from "../../../Helpers/utils";
+import { AvForm } from "availity-reactstrap-validation";
+import { showSuccess, showError } from "../../../Helpers/utils";
 import SubmitBtnLoader from "../../../Common/ButtonLoader";
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
@@ -28,8 +27,6 @@ class ClaimUserList extends React.Component {
     this.state = {
       modal: false,
     };
-
-    //this.toggle = this.toggle.bind(this);
   }
   componentDidMount = () => {
     this.props.dispatch(getAgents());

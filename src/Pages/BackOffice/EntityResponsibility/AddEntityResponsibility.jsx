@@ -4,16 +4,12 @@ import { translate } from "react-multi-lang";
 import { connect } from "react-redux";
 import compose from "compose-function";
 import { withRouter } from "react-router-dom";
-import { AvForm, AvField } from "availity-reactstrap-validation";
-import { renderTextField } from "../../Common/RenderTextField";
+import { AvForm } from "availity-reactstrap-validation";
+
 import {
   showSuccess,
   showError,
-  getLangBasedItem,
   getLangBasedDataLabel,
-  ENG_REGEX,
-  FRENCH_REGEX,
-  ARABIC_REGEX,
 } from "../../Helpers/utils";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 import {
@@ -27,13 +23,9 @@ import {
   Label,
 } from "reactstrap";
 import RenderSelectMultiInput from "../../Common/renderMultipleInput";
-import {
-  addSubCategory,
-  updateSubCategory,
-} from "../../../actions/subCategoryAction";
+import { updateSubCategory } from "../../../actions/subCategoryAction";
 import { AddResponsabilityInEntity } from "../../../actions/responsibilityAction";
 import { getCategories } from "../../../actions/categoryAction";
-import { formatRelativeWithOptions } from "date-fns/fp";
 
 class AddEntityResponsibility extends React.Component {
   constructor(props) {
@@ -42,8 +34,6 @@ class AddEntityResponsibility extends React.Component {
       modal: false,
       categoryList: [],
     };
-
-    //this.toggle = this.toggle.bind(this);
   }
 
   componentDidMount = () => {
@@ -119,11 +109,7 @@ class AddEntityResponsibility extends React.Component {
 
     return (
       <Fragment>
-        <Modal
-          isOpen={this.props.modal}
-          toggle={this.toggle}
-          // className="modalSize"
-        >
+        <Modal isOpen={this.props.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>
             <h4 className="font-weight-bold">
               {this.props.initialValues
@@ -173,7 +159,6 @@ class AddEntityResponsibility extends React.Component {
                       ? `${this.props.t("Common.UPDATE_SUB_CATEGORY")}`
                       : `${this.props.t("Common.ADD_SUB_CATEGORY")}`
                   }
-                  // label="Add SubCategories"
                   className="btn btn-success"
                   loading={this.state.loading}
                   submitting={""}
@@ -191,8 +176,6 @@ class AddEntityResponsibility extends React.Component {
 
 AddEntityResponsibility = reduxForm({
   form: "AddEntityResponsibility",
-  //validate,
-  // asyncValidate,
 })(AddEntityResponsibility);
 function mapStateToProps(state) {
   return {

@@ -1,6 +1,6 @@
 import { STATION_CONST } from "./actionTypes";
-import { AXIOS_INSTANCE, STATION_API, CONFIG } from "./apiEndPoints";
-import { checkHttpStatus, parseJSON, handleLogoutRedirect } from "../utils";
+import { AXIOS_INSTANCE, STATION_API } from "./apiEndPoints";
+import { checkHttpStatus, parseJSON } from "../utils";
 import * as base from "./baseAction";
 import { Header } from "react-bootstrap/lib/Modal";
 

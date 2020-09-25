@@ -1,18 +1,14 @@
-import React, { Fragment, Component } from "react";
-import { reduxForm, Field, change } from "redux-form";
+import React, { Fragment } from "react";
+import { reduxForm, Field } from "redux-form";
 import { translate } from "react-multi-lang";
 import { connect } from "react-redux";
 import compose from "compose-function";
 import { withRouter } from "react-router-dom";
 import { AvForm, AvField } from "availity-reactstrap-validation";
-import {
-  renderTextField,
-  renderSelectField,
-} from "../../Common/RenderTextField";
-import { showSuccess, showError, required } from "../../Helpers/utils";
+import { renderTextField } from "../../Common/RenderTextField";
+import { showSuccess, showError } from "../../Helpers/utils";
 import SubmitBtnLoader from "../../Common/ButtonLoader";
 import {
-  Button,
   Modal,
   ModalHeader,
   ModalBody,
@@ -20,7 +16,6 @@ import {
   FormGroup,
   Row,
   Col,
-  Label,
 } from "reactstrap";
 
 import { addGroup, updateGroup } from "../../../actions/groupsAction";
@@ -108,11 +103,7 @@ class AddGroup extends React.Component {
 
     return (
       <Fragment>
-        <Modal
-          isOpen={this.props.modal}
-          toggle={this.toggle}
-          // className="modalSize"
-        >
+        <Modal isOpen={this.props.modal} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>
             <h4 className="font-weight-bold">
               {this.props.initialValues
@@ -143,10 +134,7 @@ class AddGroup extends React.Component {
                             "ErrorMsg.GROUP_NAME_REQUIRED"
                           ),
                         },
-                        // pattern: {
-                        //   value: "^[a-zA-Z ]*$",
-                        //   errorMessage: this.props.t("Common.ONLY_TEXT")
-                        // },
+
                         maxLength: {
                           value: 100,
                         },
@@ -164,7 +152,6 @@ class AddGroup extends React.Component {
                       name="isDefault"
                       component={Checkbox}
                     />
-                    {/* </AvCheckboxGroup> */}
                   </FormGroup>
                 </Col>
               </Row>
@@ -175,7 +162,6 @@ class AddGroup extends React.Component {
                       ? `${this.props.t("Common.UPDATE_GROUP_BTN")}`
                       : `${this.props.t("Common.ADD_GROUP")}`
                   }
-                  // label="Add station"
                   className="btn btn-success"
                   loading={this.state.loading}
                   submitting={""}
@@ -193,11 +179,8 @@ class AddGroup extends React.Component {
 
 AddGroup = reduxForm({
   form: "AddStations",
-  //validate,
-  // asyncValidate,
 })(AddGroup);
 function mapStateToProps(state) {
- 
   return {
     addGroupSuccess: state.Group.addGroupSuccess,
     isAddFailure: state.Group.isAddFailure,

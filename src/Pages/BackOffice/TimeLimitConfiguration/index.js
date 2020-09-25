@@ -26,15 +26,12 @@ import {
   updateTimeLimitConfiguration,
 } from "../../../actions/timeLimitConfigurationAction";
 import {
-  getBase64,
   showError,
   showSuccess,
   PHONE_REGEX,
   canManage,
   permissions,
 } from "../../Helpers/utils";
-
-import { v1 as uuidv1 } from "uuid";
 
 class TimeLimitConfiguration extends Component {
   constructor(props) {

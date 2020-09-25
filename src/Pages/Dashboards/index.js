@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route } from "react-router-dom";
 
 // APPLICATIONS
 // Layout
@@ -70,10 +70,7 @@ const Dashboards = ({ match }) =>
                 path={`${match.url}/user-roles`}
                 component={UserRolesComponent}
               />
-              {/* <Route
-                path={`${match.url}/station-management`}
-                component={StationManagement}
-              /> */}
+             
               <Route
                 path={`${match.url}/change-password-backoffice`}
                 component={ChangePasswordBackoffice}

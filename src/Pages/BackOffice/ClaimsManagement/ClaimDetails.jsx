@@ -11,7 +11,6 @@ import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { getClaimsDetailsById } from "../../../actions/claimAction";
 import qString from "query-string";
 import {
-  dateTimeFormat,
   simpleDateFormat,
   getLangBasedStationLabel,
   getLangBasedDataLabel,
@@ -89,25 +88,10 @@ class ClaimsDetails extends Component {
                     <Row>
                       <Col md={6}>
                         <ul className="list-group">
-                          {/* <li className="list-group-item">
-                            {" "}
-                            {this.props.t("Common.NAME")} :{" "}
-                            <b>
-                              {getClaimsDataById
-                                ? getClaimsDataById.userFullName
-                                : ""}
-                            </b>
-                          </li> */}
-                          {/* <li class='list-group-item'>
-                            {this.props.t("Common.LAST_NAME")} :{" "}
-                            <b>
-                              {getClaimsDataById ? getClaimsDataById.lastName : ""}
-                            </b>
-                          </li> */}
                           <li className="list-group-item">
                             {this.props.t("Common.COMPLAINT_CHANNEL")} :{" "}
                             <b>
-                              {getClaimsDataById && getClaimsDataById
+                              {getClaimsDataById
                                 ? getClaimsDataById.claimChannel
                                 : "none"}
                             </b>
@@ -140,7 +124,7 @@ class ClaimsDetails extends Component {
                             {" "}
                             {this.props.t("Common.CATEGORY")} :{" "}
                             <b>
-                              {getClaimsDataById && getClaimsDataById
+                              {getClaimsDataById
                                 ? getLangBasedDataLabel(
                                     getClaimsDataById.category
                                   )
@@ -150,7 +134,7 @@ class ClaimsDetails extends Component {
                           <li className="list-group-item">
                             {this.props.t("Common.SUB_CATEGORY")} :{" "}
                             <b>
-                              {getClaimsDataById && getClaimsDataById
+                              { getClaimsDataById
                                 ? getLangBasedDataLabel(
                                     getClaimsDataById.subCategory
                                   )
@@ -176,7 +160,7 @@ class ClaimsDetails extends Component {
                           <li className="list-group-item">
                             {this.props.t("Common.DEPATURE_STN")} :{" "}
                             <b>
-                              {getClaimsDataById && getClaimsDataById
+                              {getClaimsDataById
                                 ? getLangBasedStationLabel(
                                     getClaimsDataById.departureStation
                                   )
@@ -186,7 +170,7 @@ class ClaimsDetails extends Component {
                           <li className="list-group-item">
                             {this.props.t("Common.ARRIVAL_STN")} :{" "}
                             <b>
-                              {getClaimsDataById && getClaimsDataById
+                              {getClaimsDataById
                                 ? getLangBasedStationLabel(
                                     getClaimsDataById.arrivalStation
                                   )
@@ -196,7 +180,7 @@ class ClaimsDetails extends Component {
                           <li className="list-group-item">
                             {this.props.t("Common.CREATION_DATE")} :{" "}
                             <b>
-                              {getClaimsDataById && getClaimsDataById
+                              {getClaimsDataById
                                 ? simpleDateFormat(getClaimsDataById.createDate)
                                 : ""}
                             </b>
@@ -204,7 +188,7 @@ class ClaimsDetails extends Component {
                           <li className="list-group-item">
                             {this.props.t("Common.UPDATE_DATE")} :{" "}
                             <b>
-                              {getClaimsDataById && getClaimsDataById
+                              {getClaimsDataById
                                 ? simpleDateFormat(
                                     getClaimsDataById.lastModifiedDate
                                   )

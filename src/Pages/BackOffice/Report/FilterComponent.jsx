@@ -21,10 +21,7 @@ import compose from "compose-function";
 import { translate } from "react-multi-lang";
 import { reduxForm, Field } from "redux-form";
 
-import {
-  renderTextField,
-  renderSelectField,
-} from "../../Common/RenderTextField";
+import { renderSelectField } from "../../Common/RenderTextField";
 import moment from "moment";
 
 import { defaultDateFormat } from "../../Helpers/utils";
@@ -42,7 +39,6 @@ class FilterComponent extends Component {
 
   // This function is used to handle startDateChange
   handleStartDateChange = (date) => {
-    console.log(date)
     this.setState({ startDates: date });
   };
   // This function is used to handle EndDateChange
@@ -93,18 +89,16 @@ class FilterComponent extends Component {
     }
 
     if (this.state.startDates) {
-      formProps.startDate = `${moment(new Date(this.state.startDates)).format("YYYY-MM-DD")}`;
-    
-      // formProps.startDate = `${moment(
-      //   new Date(this.state.startDates).getTime()
-      // )}`;
+      formProps.startDate = `${moment(new Date(this.state.startDates)).format(
+        "YYYY-MM-DD"
+      )}`;
     } else {
       delete formProps.startDate;
     }
     if (this.state.endDates) {
-      formProps.endDate = `${moment(new Date(this.state.endDates)).format("YYYY-MM-DD")}`;
-      // formProps.endDate = `${moment(new Date(this.state.endDates).getTime())}`;
-     
+      formProps.endDate = `${moment(new Date(this.state.endDates)).format(
+        "YYYY-MM-DD"
+      )}`;
     } else {
       delete formProps.endDate;
     }
@@ -120,7 +114,7 @@ class FilterComponent extends Component {
   render() {
     const { handleSubmit } = this.props;
     const { startDate, endDate } = this.state;
-    console.log(startDate)
+
     return (
       <Fragment>
         <Col md="12" className="CI-list-filter">
@@ -145,16 +139,12 @@ class FilterComponent extends Component {
                         className="form-control"
                         onChange={(e) => this.disableDate(e)}
                       >
-                        {/* <option value="0">select Date</option> */}
                         <option value="lastMonth">
                           {this.props.t("Common.LAST_MONTH")}
                         </option>
                         <option value="lastSixMonth">
                           {this.props.t("Common.LAST_SIX_MONTH")}
                         </option>{" "}
-                        {/* <option value="lastYear">
-                          {this.props.t("Common.LAST_YEAR")}  //->change done in preprodcution from client side
-                        </option> */}
                         <option value="customDate">
                           {" "}
                           {this.props.t("Common.CUSTOM_DATE")}
